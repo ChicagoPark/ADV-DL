@@ -46,9 +46,16 @@ Advanced Deep Learning
 > (3) t second of audio: T X M tensor
 
 
-## [1] Linear regression VS Classification
+## [1] Regression and classification
 
+### [1-1] Diference between linear regression and classificaiton
 
+> * Regression predicts real value(smooth range)
+> 
+> * Classification preditcs integer/class(specific kinds)
 
+## [1-2] Linear regression / logistic regression / multi-class classification
 
-## [2]
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/160286720-7b4eea2c-58b2-4c82-a052-bfc3b5bb06c3.jpg">
+
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/160286721-33e26992-3334-492c-b604-c7b21cd170d1.jpg">
