@@ -68,7 +68,10 @@ Advanced Deep Learning
 ## [] PyTorch
 #### [ -1] Basic tensor
 ```python
-torch.zeros(10) # tensor([0., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
+t = torch.zeros(10) # tensor([0., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
+
+# Control the dimension of tensor
+t[None, :]          # torch.Size([1, 10])
 
 torch.ones([4,5]) == torch.ones(4,5)
 #tensor([[1., 1., 1., 1., 1.],
@@ -118,3 +121,6 @@ image_tensor = image_to_tensor(I)
 tensor_to_image = transforms.ToPILImage()
 tensor_to_image(image_tensor)
 ```
+
+
+#### [ - ] Tensorboard
