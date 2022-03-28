@@ -66,6 +66,7 @@ Advanced Deep Learning
 > * [2] Benefit: Different from numerical differentiation, Backpropagation `saves the differentiation result matrix` from the the highest layer, then goes down `using saved matrix`. Thus, it is beneficial when it comes to memory utility and the amounth of operation.
 
 ## [] PyTorch
+#### [ -1] Basic tensor
 ```python
 torch.zeros(10) # tensor([0., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
 
@@ -90,4 +91,30 @@ v.view(10, -1) # we can put -1 to define another size automatically
 #        [70, 71, 72, 73, 74, 75, 76, 77, 78, 79],
 #        [80, 81, 82, 83, 84, 85, 86, 87, 88, 89],
 #        [90, 91, 92, 93, 94, 95, 96, 97, 98, 99]])
+```
+
+#### [ -2] Load image
+```python
+from PIL import Image
+I = Image.open('cat.jpg')
+
+# 1. covert image to numpy / size: (220, 220, 3)
+np.array(I)
+# array([[[213, 210, 175],
+#        [217, 214, 179],
+#        [222, 219, 188],
+#        ...,
+#        [234, 219, 216],
+#        [236, 218, 214],
+#        [236, 218, 214]]])
+
+# 2. covert image to tensor: torchvision module is necessary / torch.Size([3, 220, 220])
+from torchvision import transforms
+# define the class for transformation
+image_to_tensor = transforms.ToTensor()
+image_tensor = image_to_tensor(I)
+
+# 3. convert tensor to image
+tensor_to_image = transforms.ToPILImage()
+tensor_to_image(image_tensor)
 ```
