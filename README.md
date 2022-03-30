@@ -65,7 +65,7 @@ Advanced Deep Learning
 >  
 > * [2] Benefit: Different from numerical differentiation, Backpropagation `saves the differentiation result matrix` from the the highest layer, then goes down `using saved matrix`. Thus, it is beneficial when it comes to memory utility and the amount of operation.
 
-> <img width="950" alt="IMG" src="https://user-images.githubusercontent.com/73331241/160851568-b9d50f91-1148-473e-84e8-f08d8bf874ef.jpeg">
+> <img width="950" alt="IMG" src="https://user-images.githubusercontent.com/73331241/160856967-d7de2f36-f8bb-491b-b9f3-4b3c76186494.jpeg">
 
 ## [] PyTorch
 #### [ -1] Basic tensor
