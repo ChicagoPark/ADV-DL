@@ -63,7 +63,7 @@ Advanced Deep Learning
 ## [1-3] Backpropagation
 > * [1] Purpose: to update the parameters with the optimal values by analyzing and differentiating the loss function
 >  
-> * [2] Benefit: Different from numerical differentiation, Backpropagation `saves the differentiation result matrix` from the the highest layer, then goes down `using saved matrix`. Thus, it is beneficial when it comes to memory utility and the amount of operation.
+> * [2] Benefit: Different from numerical differentiation, Backpropagation `saves the differentiation result matrix` from the the highest layer, then goes down `with saved matrix`. Thus, it is beneficial when it comes to memory utility and the amount of operation.
 
 > <img width="950" alt="IMG" src="https://user-images.githubusercontent.com/73331241/160856967-d7de2f36-f8bb-491b-b9f3-4b3c76186494.jpeg">
 
