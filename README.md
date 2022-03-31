@@ -48,7 +48,7 @@ Advanced Deep Learning
 
 ## [1] Regression and classification
 
-### [1-1] Diference between linear regression and classificaiton
+### [1-1] Difference between linear regression and classificaiton
 
 > * Regression predicts real value(smooth range)
 > 
