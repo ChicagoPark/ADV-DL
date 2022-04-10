@@ -28,7 +28,7 @@ Advanced Deep Learning
       lay gradient vector horizontally
       
       
-### [0-2] Probability and likehood
+### [0-2] Probability and likelihood
 
 > likelihood refers to the past
 > 
@@ -52,7 +52,7 @@ Advanced Deep Learning
 
 > * Regression predicts real value(smooth range)
 > 
-> * Classification preditcs integer/class(specific kinds)
+> * Classification predicts integer/class(specific kinds)
 
 ## [1-2] Linear regression / logistic regression / multi-class classification
 
