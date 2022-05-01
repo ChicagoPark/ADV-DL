@@ -67,6 +67,59 @@ Advanced Deep Learning
 
 > <img width="950" alt="IMG" src="https://user-images.githubusercontent.com/73331241/160856967-d7de2f36-f8bb-491b-b9f3-4b3c76186494.jpeg">
 
+
+## [2] Neural Network Modeling
+
+### [2-1] Classifier
+
+> #### (1) The `limitation of linear classifier`: we cannot solve the problem which `requires curve` to classify two groups
+> 
+> * #### Does adding more linear layers help?
+>      > No. Combincation of linear layers still linear.
+
+> #### (2) Non-linearities: ReLU(x) = max(x,0)
+> 
+> Non-linear and differentiable almost everywhere
+
+
+### [2-2] Positive regression
+
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166146143-4d7fb0d0-9d4b-4300-a373-dde7fdfce2b0.png">
+> 
+> > option1(ReLU)
+> > > just want to predict a value that is positive, and you don't care about to train network we can use ReLU function.
+>
+> > option2(Soft ReLU)
+> > > if we want to train a network with positive prediction, we should always use soft relu(softplus) function
+
+
+### [2-3] Binary Classification
+
+option1 Thresholding: step function
+hard to train because output activation function shape is `step function`. Thus, the derivative in everywhere is 0.
+
+`option1 Logistic Regression`: sigmoid
+
+
+### [2-3] General Classification
+
+> option1: argmax
+> 
+>  > hard to train because we `cannot compute` gradient of argmax function.
+
+> `option2: softmax`
+> 
+>  > optimize it using `cross entropy`
+
+> `Tip in output representations`
+>  > `do not` `add` other `output transformation` into model's output. Always output raw values
+>  > reason: many output transformation makes `harder to differentiate`. If bigger output transformation, numericably unstable.
+
+
+# `Lec: 31:10 : 2022-05-01`
+
+
+
 ## [] PyTorch
 #### [ -1] Basic tensor
 ```python
