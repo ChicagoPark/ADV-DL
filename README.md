@@ -75,7 +75,7 @@ Advanced Deep Learning
 > #### (1) The `limitation of linear classifier`: we cannot solve the problem which `requires curve` to classify two groups
 > 
 > * #### Does adding more linear layers help?
->      > No. Combincation of linear layers still linear.
+>      > No. Combination of linear layers still linear.
 
 > #### (2) Non-linearities: ReLU(x) = max(x,0)
 > 
@@ -115,10 +115,51 @@ hard to train because output activation function shape is `step function`. Thus,
 >  > `do not` `add` other `output transformation` into model's output. Always output raw values
 >  > reason: many output transformation makes `harder to differentiate`. If bigger output transformation, numericably unstable.
 
+### [2-4] Loss
 
-# `Lec: 31:10 : 2022-05-01`
+> #### (1) Loss - Regression
+> 
+> > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166210192-74bdc977-674a-4549-aedf-33fd3c9ae40d.png">
+>
+> `difference` between L1 loss and L2 loss: when we predict wrong, L1 loss increases linearly, but L2 loss increases dramatically(Huge gradient, huge loss).
+> 
+> Additional information: in deep learning, it came out that L1 loss and L2 loss doesn't make a huge difference.
+
+> #### (2) Loss - Classification
+> 
+> > (i) -Log likelihood
+> > - log(p(y))
+> 
+> > y: ground truth label
+> > p = activation function's output (e.g. softmax(o))
+> > p(y): take the probability of the ground truth label through our output activation function
+>
+> > (ii) Cross entropy: sum over all labels y
+> > 
+> > `In one-hot encoding, cross entropy and -log likelihood is exactly the same.`
+>
+> `[Issue]`
+> > * From the classification process, because of sigmoid and softmax functions attributes, we can get 0 from the activation function. Thus, once we put this value into log, there is no value is defined.
+>
+> `[Solution]`
+> > * To solve it, modern deep learning package combine log and sigmoid or combine log and softmax
+> > 
+> > ```python
+> > # In PyTorch: log + sigmoid
+> > BCEWithLogitsLoss
+> > ```
+> > 
+> > ```python
+> > # In PyTorch: log + softmax
+> > CrossEntropyLoss
+> > ```
 
 
+
+
+
+
+# `Lec: 44:00 : 2022-05-02`
 
 ## [] PyTorch
 #### [ -1] Basic tensor
@@ -179,3 +220,7 @@ tensor_to_image(image_tensor)
 
 
 #### [ - ] Tensorboard
+
+<!--
+Course Information: http://www.philkr.net/cs342/
+-->
