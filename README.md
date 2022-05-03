@@ -90,13 +90,14 @@ Advanced Deep Learning
 > > > just want to predict a value that is positive, and you don't care about to train network we can use ReLU function.
 >
 > > option2(Soft ReLU)
-> > > if we want to train a network with positive prediction, we should always use soft relu(softplus) function
+> > > if we want to train a network with positive prediction, we should always use softrelu(softplus) function
 
 
 ### [2-3] Binary Classification
 
 option1 Thresholding: step function
-hard to train because output activation function shape is `step function`. Thus, the derivative in everywhere is 0.
+
+> hard to train because output activation function shape is `step function`. Thus, the derivative in everywhere is 0.
 
 `option1 Logistic Regression`: sigmoid
 
@@ -112,7 +113,9 @@ hard to train because output activation function shape is `step function`. Thus,
 >  > optimize it using `cross entropy`
 
 > `Tip in output representations`
+> 
 >  > `do not` `add` other `output transformation` into model's output. Always output raw values
+>  > 
 >  > reason: many output transformation makes `harder to differentiate`. If bigger output transformation, numericably unstable.
 
 ### [2-4] Loss
@@ -131,7 +134,9 @@ hard to train because output activation function shape is `step function`. Thus,
 > > - log(p(y))
 > 
 > > y: ground truth label
+> > 
 > > p = activation function's output (e.g. softmax(o))
+> > 
 > > p(y): take the probability of the ground truth label through our output activation function
 >
 > > (ii) Cross entropy: sum over all labels y
