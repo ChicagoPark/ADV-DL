@@ -120,6 +120,8 @@ option1 Thresholding: step function
 
 ### [2-4] Loss
 
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166390923-c1c541ce-8c65-4c3b-a8f8-8b18b289ecee.png">
+
 > #### (1) Loss - Regression
 > 
 > > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166210192-74bdc977-674a-4549-aedf-33fd3c9ae40d.png">
@@ -159,12 +161,30 @@ option1 Thresholding: step function
 > > CrossEntropyLoss
 > > ```
 
+### [2-5] Gradient Descent
+
+#### [GD-Stochastic Gradient Descent]
+
+> Compute the gradient as we move, so always we take a step and compute the gradient and take a step ...
+
+> SGD can work better than standard gradient descent in non convex function.
+> 
+> reason1: oscillation of SGD helps to explore the function
+> 
+> reason2: faster. We don't have to wait to loop over entire training set to compute gradient
+
+> #### (1) Variance of SGD
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166393020-04314dc3-0935-4eef-a871-80c87f9402b2.png">
+> 
+> measure the agreement between different data samples about gradient, we can compute the variance of gradient estimates.
+> 
+> difference between one single data point and the gradient of entire objects' loss
+> 
+> Reason of introduction(biggest issue): not all training set give a good direction to update
+ 
 
 
-
-
-
-# `Lec: 44:00 : 2022-05-02`
+# `Lec: 1:11:00 : 2022-05-02`
 
 ## [] PyTorch
 #### [ -1] Basic tensor
@@ -221,6 +241,24 @@ image_tensor = image_to_tensor(I)
 # 3. convert tensor to image
 tensor_to_image = transforms.ToPILImage()
 tensor_to_image(image_tensor)
+```
+
+#### [ -3] Neural Network
+```python
+class Network1(torch.nn.Module):
+    def __init__(self, n_hidden=100):
+        super().__init__()                                          # inherit parent's __init__ function
+        self.linear1 = torch.nn.Linear(input_size, n_hidden)
+        self.activation = torch.nn.ReLU()
+        self.linear2 = torch.nn.Linear(n_hidden, 1)
+    
+    def forward(self, x):
+        return self.linear2(self.activation(self.linear1(x.view(x.size(0), -1))))
+
+# genertate the Class
+net1 = Network1(100)
+# check the result
+print()
 ```
 
 
