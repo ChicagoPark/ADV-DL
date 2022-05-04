@@ -165,6 +165,10 @@ option1 Thresholding: step function
 
 #### [GD-Stochastic Gradient Descent]
 
+<img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166613395-fad93739-6997-4582-9baf-0e0b625ca367.png">
+
+`highly oscillate and has large variance.`
+
 > Compute the gradient as we move, so always we take a step and compute the gradient and take a step ...
 
 > SGD can work better than standard gradient descent in non convex function.
@@ -172,6 +176,8 @@ option1 Thresholding: step function
 > reason1: oscillation of SGD helps to explore the function
 > 
 > reason2: faster. We don't have to wait to loop over entire training set to compute gradient
+
+
 
 > #### (1) Variance of SGD
 > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166393020-04314dc3-0935-4eef-a871-80c87f9402b2.png">
@@ -181,10 +187,37 @@ option1 Thresholding: step function
 > difference between one single data point and the gradient of entire objects' loss
 > 
 > Reason of introduction(biggest issue): not all training set give a good direction to update
- 
+
+### [2-6] Mini-batches
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166613762-e105009e-af17-4cec-8dd0-31a8909ed68c.png">
+> 
+> Way to reduce the variance of SGD. Thus we should use mini-batch as much as we can.
+> 
+> ##### `What Mini-batches do?`
+> * Not just get one data element(x, y), it takes bunch(so-called batch or mini-batch) of data elements.
+>
+> ##### `How mini-batches update parameters?`
+> * for each mini-batch, we compute the average gradient over the mini-batch and update the parameters instead of updating with single data element.
+> 
+> ##### `What is the benefits of mini-batches?`
+> * Estimate the gradient robustly, reduce the variance of SGD massively
+>
+> ##### `Difference in variance`
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166613961-a3ecc639-17b5-44ee-9f4c-ad83b8181703.png">
+
+### [2-7] Momentum
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166614563-f4a678d3-7cc3-4534-937c-d713c02809c9.png">
+> 
+> Momentum(v) is that functionalized gradient by adding previous Momentum(v). It helps to take into account the past. Rho is the parameter for past considering.
+> 
+> Additional Benefit of Momentum
+> 
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166614982-b3a36031-062b-4487-bbae-9e821a27481e.png">
+> 
+> Variance reduction of Momentum (since update term(`blue`) is getting smaller.)
 
 
-# `Lec: 1:11:00 : 2022-05-02`
+# `Lec: 1:25:00 : 2022-05-04`
 
 ## [] PyTorch
 #### [ -1] Basic tensor
