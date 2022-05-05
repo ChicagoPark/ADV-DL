@@ -87,10 +87,10 @@ Advanced Deep Learning
 > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166146143-4d7fb0d0-9d4b-4300-a373-dde7fdfce2b0.png">
 > 
 > > option1(ReLU)
-> > > just want to predict a value that is positive, and you don't care about to train network we can use ReLU function.
+> > > just want to `predict a value` that is positive, and you `don't care about to train network` we can use ReLU function.
 >
 > > option2(Soft ReLU)
-> > > if we want to train a network with positive prediction, we should always use softrelu(softplus) function
+> > > if we `want to train` a network with positive prediction, we should always use softrelu(softplus) function
 
 
 ### [2-3] Binary Classification
@@ -120,7 +120,7 @@ option1 Thresholding: step function
 
 ### [2-4] Loss
 
-> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166390923-c1c541ce-8c65-4c3b-a8f8-8b18b289ecee.png">
+> <img width="150" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166390923-c1c541ce-8c65-4c3b-a8f8-8b18b289ecee.png">
 
 > #### (1) Loss - Regression
 > 
@@ -171,7 +171,7 @@ option1 Thresholding: step function
 
 > Compute the gradient as we move, so always we take a step and compute the gradient and take a step ...
 
-> SGD can work better than standard gradient descent in non convex function.
+> SGD can `work better` than standard gradient descent in `non convex function`.
 > 
 > reason1: oscillation of SGD helps to explore the function
 > 
@@ -186,18 +186,18 @@ option1 Thresholding: step function
 > 
 > difference between one single data point and the gradient of entire objects' loss
 > 
-> Reason of introduction(biggest issue): not all training set give a good direction to update
+> Reason of introduction(biggest issue): `not` all training set give a `good direction` to update
 
 ### [2-6] Mini-batches
 > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166613762-e105009e-af17-4cec-8dd0-31a8909ed68c.png">
 > 
-> Way to reduce the variance of SGD. Thus we should use mini-batch as much as we can.
+> Way to `reduce the variance` of SGD. Thus we should use mini-batch as much as we can.
 > 
 > ##### `What Mini-batches do?`
 > * Not just get one data element(x, y), it takes bunch(so-called batch or mini-batch) of data elements.
 >
 > ##### `How mini-batches update parameters?`
-> * for each mini-batch, we compute the average gradient over the mini-batch and update the parameters instead of updating with single data element.
+> * for each mini-batch, we compute the `average gradient` over the mini-batch and `update the parameters` instead of updating with single data element.
 > 
 > ##### `What is the benefits of mini-batches?`
 > * Estimate the gradient robustly, reduce the variance of SGD massively
@@ -208,7 +208,7 @@ option1 Thresholding: step function
 ### [2-7] Momentum
 > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166614563-f4a678d3-7cc3-4534-937c-d713c02809c9.png">
 > 
-> Momentum(v) is that functionalized gradient by adding previous Momentum(v). It helps to take into account the past. Rho is the parameter for past considering.
+> Momentum(v) is that `functionalized gradient` by adding previous Momentum(v). It helps to take into account the past. Rho is the parameter for past considering.
 > 
 > Additional Benefit of Momentum
 > 
@@ -292,6 +292,28 @@ class Network1(torch.nn.Module):
 net1 = Network1(100)
 # check the result
 print()
+```
+
+```python
+class Network2(torch.nn.Module):
+    def __init__(self, *hidden_size): # *hidden_size receives multiple lists.
+        super().__init__()
+        layers = []
+        # Add the hidden layers
+        n_in = input_size
+        for n_out in hidden_size:
+            layers.append(torch.nn.Linear(n_in, n_out))
+            layers.append(torch.nn.ReLU())
+            n_in = n_out
+        
+        # Add the output classifier
+        layers.append(torch.nn.Linear(n_out, 1))
+        
+        # Define Neural Network
+        self.network = torch.nn.Sequential(*layers)
+    
+    def forward(self, x):
+        return self.network(x.view(x.size(0), -1))
 ```
 
 
