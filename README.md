@@ -216,6 +216,117 @@ option1 Thresholding: step function
 > 
 > Variance reduction of Momentum (since update term(`blue`) is getting smaller.)
 
+* Use mini-batched and Momentum every time.
+
+### [2-8] Training code
+
+`optimizer.zero_grad()` is mandatory before we backward the loss.
+When we use Fully connected model which only has linear layer, it can be overfitted massively.
+
+```python
+# Training code
+# TODO: initialize some variables / hyper-parameters
+
+# TODO: Create the tensorboard logger
+
+# TODO: Create network
+
+# TODO: Create optimizer
+
+# TODO: Create loss function
+
+# TODO: Start training
+    
+    # TODO Shuffle training data
+    
+        # TODO: Construct batch
+        
+        # TODO: Construct output
+        
+        # TODO: Construct the loss
+        
+        # TODO: Logging
+        
+        # TODO: Compute the gradient
+        
+        # TODO: Step
+        
+    # TODO: Log training accuracy
+    
+    # TODO: Evaluate on validation set
+    
+    # TODO: Log validation accuracy
+```
+
+### [2-9] Layers
+> ##### `What is a layer?`
+> 
+> > Largest computational unit that remains unchanged throughout different architectures
+> 
+> ##### `Layer naming`
+> <img width="150" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166881431-3d53270c-10d2-45f3-9396-114fe5c1b6b3.png">
+> 
+> > The number of layer: 4
+> > 
+> > Normal output of activation function: `activation`
+> > 
+> > The output of activation function goes in to output layer: `feature`
+
+
+### [2-10] Non-linearities (activatino function)
+> <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166887445-318949cb-63e2-4c5b-b421-657c4f09e20d.png">
+> 
+> > Allow a deep network to model arbitrary differentiable functions
+> 
+> ##### `Zoo of activation functions`
+> > <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166887675-166bdc7b-9050-44ea-8b0d-5331febd274c.png">
+> 
+> ##### `Traditional activation functions-Sigmoid`
+> > <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166888042-c40c82ba-4c7d-423e-9c85-940196cef24a.png">
+> >
+> > ###### `Issue` of sigmoid: derivative is quite flat as we can see the above orange line
+> > 
+> > If we want to use sigmoid, we should initialize the value closed to zero.
+> > 
+> * `tanh` is just the scaled activation function of sigmoid
+> 
+> ##### `Traditional activation functions-ReLU`
+> > <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166888623-046afc6e-66ab-4476-b4c7-51100fdb2193.png">
+> > 
+> > All positive value have derivative one, and all negative value have derivative zero.
+> 
+> > ###### `Issue` of ReLU: Dead ReLU
+> >  > If all the input values are negative, we can never get derivative to update the model.
+> > 
+> > ###### `How to Prevent dead ReLUs?`
+> >  > <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166889718-b801f5ac-b3af-4a73-bde2-30880acdbb71.png">
+> >  > 
+> >  > (1) Initialize Network carefully (input data can be distributed near zero or bigger than that.)
+> >  > 
+> >  > (2) Decrease the learning rate
+> >  > 
+> >  > (3) Leaky ReLU
+> >  > > <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166890041-8b7fc686-c2ff-4aa5-92c2-685daf1e2e4c.png">
+> >  > > 
+> >  > > PReLU: Parameterized ReLU
+> >  > 
+> >  > (4) ELU
+> >  > > <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166892425-2fe1dae2-f2be-4671-920b-8823e3eee97d.png">
+> >  > > 
+> >  > > `Attribute`: Sometime, ELU is slower than ReLU or Leaky ReLU. Because of gradient calculation.
+>
+> ##### `Activation functions-Maxout`
+> > <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166892834-5b956c7a-f1b8-4d33-8f5f-2abe6ac7969f.png">
+> 
+> ##### `Which activation to choose?`
+> > <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166893493-c263b50b-547f-4e68-b781-ae0c66ba7c0d.png">
+> >
+> > Try to use ReLU first. If you have a problem with Dead ReLU, we can try Leaky ReLU, and if Leadky ReLU works, try to use PReLU.
+> > 
+> > sigmoid and tanh are usually used in Natural language process or RNN.
+
+
+
 
 # `Lec: 1:25:00 : 2022-05-04`
 
@@ -315,7 +426,72 @@ class Network2(torch.nn.Module):
     def forward(self, x):
         return self.network(x.view(x.size(0), -1))
 ```
+#### [ -4] Training code
 
+```python
+# Training code
+# TODO: initialize some variables / hyper-parameters
+n_epochs = 100
+batch_size = 128
+
+# TODO: Create the logger
+import torch.utils.tensorboard as tb
+train_logger = tb.SummaryWriter(log_dir+'/deepnet1/train', flush_secs=1)
+valid_logger = tb.SummaryWriter(log_dir+'/deepnet1/valid', flush_secs=1)
+
+# TODO: Create network
+# Take the model and upload it to GPU
+net2 = Network2(100,50,50).to(device)
+
+# TODO: Create optimizer
+optimizer = torch.optim.SGD(net2.parameters(), lr=0.01, momentum=0.9, weight_decay=1e-4)
+
+# TODO: Create loss function
+loss = torch.nn.BCEWithLogitsLoss()
+
+# TODO: Start training
+global_step = 0
+for epoch in range(n_epochs):
+    # TODO: Shuffle the data
+    permutation = torch.randperm(train_data.size(0)) # make the permutation from 0 to the number of training dataset -1
+    
+    # TODO: Iterate
+    train_accuracy = []
+    for it in range(0, len(permutation)-batch_size+1, batch_size):
+        # TODO: Construct batch
+        batch_samples = permutation[it:it+batch_size]
+        batch_data, batch_label = train_data[batch_samples], train_label[batch_samples]
+        
+        # TODO: Compute output
+        o = net2(batch_data)
+        
+        # TODO: Compute the loss
+        loss_val = loss(o, batch_label.float())
+        
+        # TODO: Logging
+        train_logger.add_scalar('train/loss', loss_val, global_step=global_step)
+        
+        # TODO: Compute the accuracy
+        train_accuracy.extend(((o > 0).long() == batch_label).cpu().detach().numpy()) # transfer all of te label data to cpu and detach it from computational graph and convert it to numpy
+        
+        # TODO: Compute the gradient
+        optimizer.zero_grad() # through zero_grad(), we don't accumulate the gradient over multiple iteration.
+        loss_val.backward()
+        
+        # TODO: Step
+        optimizer.step()
+        
+        # TODO: Increase the global step
+        global_step += 1
+    
+    # TODO: Evaluate the model
+    valid_pred = net2(valid_data) > 0
+    valid_accuracy = float((valid_pred.long() == valid_label).float().mean())
+    # TODO: Log training accuracy
+    train_logger.add_scalar('train/accuracy', np.mean(train_accuracy), global_step=global_step)
+    # TODO: Log validation accuracy
+    valid_logger.add_scalar('valid/accuracy', valid_accuracy, global_step=global_step)
+```
 
 #### [ - ] Tensorboard
 
