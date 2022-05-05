@@ -325,6 +325,18 @@ When we use Fully connected model which only has linear layer, it can be overfit
 > > 
 > > sigmoid and tanh are usually used in Natural language process or RNN.
 
+### [2-11] Hyper-parameters
+> Any parameters set by hand and not learned by SGD.
+
+### [2-12] `Loss function selection`
+> <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166894368-990121d0-6d63-4f55-a4bc-b67ca5316b5e.png">
+
+* MSELoss is also referred to as L2Loss
+* 
+* Momentum is 0.9 in most practice.
+
+
+
 
 
 
