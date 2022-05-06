@@ -241,9 +241,9 @@ When we use Fully connected model which only has linear layer, it can be overfit
     
         # TODO: Construct batch
         
-        # TODO: Construct output
+        # TODO: Compute output
         
-        # TODO: Construct the loss
+        # TODO: Compute the loss
         
         # TODO: Logging
         
