@@ -486,11 +486,11 @@ for epoch in range(n_epochs):
         # TODO: Compute the accuracy
         train_accuracy.extend(((o > 0).long() == batch_label).cpu().detach().numpy()) # transfer all of te label data to cpu and detach it from computational graph and convert it to numpy
         
-        # TODO: Compute the gradient
+        # TODO: Compute the gradient from loss function
         optimizer.zero_grad() # through zero_grad(), we don't accumulate the gradient over multiple iteration.
         loss_val.backward()
         
-        # TODO: Step
+        # TODO: Update model weights
         optimizer.step()
         
         # TODO: Increase the global step
