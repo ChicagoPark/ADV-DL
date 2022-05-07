@@ -120,11 +120,11 @@ option1 Thresholding: step function
 
 ### [2-4] Loss
 
-> <img width="150" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166390923-c1c541ce-8c65-4c3b-a8f8-8b18b289ecee.png">
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166390923-c1c541ce-8c65-4c3b-a8f8-8b18b289ecee.png">
 
 > #### (1) Loss - Regression
 > 
-> > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166210192-74bdc977-674a-4549-aedf-33fd3c9ae40d.png">
+> > <img width="190" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166210192-74bdc977-674a-4549-aedf-33fd3c9ae40d.png">
 >
 > `difference` between L1 loss and L2 loss: when we predict wrong, L1 loss increases linearly, but L2 loss increases dramatically(Huge gradient, huge loss).
 > 
@@ -194,7 +194,7 @@ option1 Thresholding: step function
 > Way to `reduce the variance` of SGD. Thus we should use mini-batch as much as we can.
 > 
 > ##### `What Mini-batches do?`
-> * Not just get one data element(x, y), it takes bunch(so-called batch or mini-batch) of data elements.
+> * Not just get one data element(x, y), it `takes bunch`(so-called batch or mini-batch) of data elements.
 >
 > ##### `How mini-batches update parameters?`
 > * for each mini-batch, we compute the `average gradient` over the mini-batch and `update the parameters` instead of updating with single data element.
@@ -206,7 +206,7 @@ option1 Thresholding: step function
 > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166613961-a3ecc639-17b5-44ee-9f4c-ad83b8181703.png">
 
 ### [2-7] Momentum
-> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166614563-f4a678d3-7cc3-4534-937c-d713c02809c9.png">
+> <img width="190" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166614563-f4a678d3-7cc3-4534-937c-d713c02809c9.png">
 > 
 > Momentum(v) is that `functionalized gradient` by adding previous Momentum(v). It helps to take into account the past. Rho is the parameter for past considering.
 > 
@@ -264,7 +264,7 @@ When we use Fully connected model which only has linear layer, it can be overfit
 > > Largest computational unit that remains unchanged throughout different architectures
 > 
 > ##### `Layer naming`
-> <img width="150" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166881431-3d53270c-10d2-45f3-9396-114fe5c1b6b3.png">
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166881431-3d53270c-10d2-45f3-9396-114fe5c1b6b3.png">
 > 
 > > The number of layer: 4
 > > 
@@ -274,15 +274,15 @@ When we use Fully connected model which only has linear layer, it can be overfit
 
 
 ### [2-10] Non-linearities (activatino function)
-> <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166887445-318949cb-63e2-4c5b-b421-657c4f09e20d.png">
+> <img width="190" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166887445-318949cb-63e2-4c5b-b421-657c4f09e20d.png">
 > 
 > > Allow a deep network to model arbitrary differentiable functions
 > 
 > ##### `Zoo of activation functions`
-> > <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166887675-166bdc7b-9050-44ea-8b0d-5331febd274c.png">
+> > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166887675-166bdc7b-9050-44ea-8b0d-5331febd274c.png">
 > 
 > ##### `Traditional activation functions-Sigmoid`
-> > <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166888042-c40c82ba-4c7d-423e-9c85-940196cef24a.png">
+> > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166888042-c40c82ba-4c7d-423e-9c85-940196cef24a.png">
 > >
 > > ###### `Issue` of sigmoid: derivative is quite flat as we can see the above orange line
 > > 
@@ -291,7 +291,7 @@ When we use Fully connected model which only has linear layer, it can be overfit
 > * `tanh` is just the scaled activation function of sigmoid
 > 
 > ##### `Traditional activation functions-ReLU`
-> > <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166888623-046afc6e-66ab-4476-b4c7-51100fdb2193.png">
+> > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166888623-046afc6e-66ab-4476-b4c7-51100fdb2193.png">
 > > 
 > > All positive value have derivative one, and all negative value have derivative zero.
 > 
@@ -299,19 +299,19 @@ When we use Fully connected model which only has linear layer, it can be overfit
 > >  > If all the input values are negative, we can never get derivative to update the model.
 > > 
 > > ###### `How to Prevent dead ReLUs?`
-> >  > <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166889718-b801f5ac-b3af-4a73-bde2-30880acdbb71.png">
+> >  > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166889718-b801f5ac-b3af-4a73-bde2-30880acdbb71.png">
 > >  > 
 > >  > (1) Initialize Network carefully (input data can be distributed near zero or bigger than that.)
 > >  > 
 > >  > (2) Decrease the learning rate
 > >  > 
 > >  > (3) Leaky ReLU
-> >  > > <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166890041-8b7fc686-c2ff-4aa5-92c2-685daf1e2e4c.png">
+> >  > > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166890041-8b7fc686-c2ff-4aa5-92c2-685daf1e2e4c.png">
 > >  > > 
 > >  > > PReLU: Parameterized ReLU
 > >  > 
 > >  > (4) ELU
-> >  > > <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166892425-2fe1dae2-f2be-4671-920b-8823e3eee97d.png">
+> >  > > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166892425-2fe1dae2-f2be-4671-920b-8823e3eee97d.png">
 > >  > > 
 > >  > > `Attribute`: Sometime, ELU is slower than ReLU or Leaky ReLU. Because of gradient calculation.
 >
@@ -321,7 +321,7 @@ When we use Fully connected model which only has linear layer, it can be overfit
 > ##### `Which activation to choose?`
 > > <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166893493-c263b50b-547f-4e68-b781-ae0c66ba7c0d.png">
 > >
-> > Try to use ReLU first. If you have a problem with Dead ReLU, we can try Leaky ReLU, and if Leadky ReLU works, try to use PReLU.
+> > Try to use `ReLU first`. If you have a problem with Dead ReLU, we can try `Leaky ReLU`, and if Leadky ReLU works, try to use `PReLU`.
 > > 
 > > sigmoid and tanh are usually used in Natural language process or RNN.
 
@@ -340,7 +340,7 @@ When we use Fully connected model which only has linear layer, it can be overfit
 
 
 
-# `Lec: 1:25:00 : 2022-05-04`
+# `Lec 4: 0:00:00 : 2022-05-08`
 
 ## [] PyTorch
 #### [ -1] Basic tensor
