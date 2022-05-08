@@ -335,12 +335,31 @@ When we use Fully connected model which only has linear layer, it can be overfit
 * 
 * Momentum is 0.9 in most practice.
 
+----
+
+## [3] Convolutional Neural Network
+
+### [3-0] The problem of FCL for image processing
+> <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167284388-c8f105de-0053-4ac4-8e7f-f48431b631b4.png">
+> 
+> > <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167284471-70588bfe-1cf6-4b58-a757-a318c1750525.png">
+> > 
+> > (Bad reason 1) Fully connected networks do not preserve any pattern in the image. Even though image shifts or rotates little bit, the input to the deep learning changes drastically.
+> > 
+> > (Bad reason 2) Lots of parameters are required in training process.
+
+### [3-1] Convolutions
+> `Sliding` linear transformation
+> > > <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167284715-803aa68c-becf-47fe-addb-41b365145bd4.png">
+> 
+> Why `1X1 convolution kernel` is necessary?
+> > To reduce the size of feature map to do model compression. (maintaining W and H of the input size.)
 
 
 
+# `Lec 5: 0:30:30 : 2022-05-08`
 
-
-# `Lec 4: 0:00:00 : 2022-05-08`
+----
 
 ## [] PyTorch
 #### [ -1] Basic tensor
