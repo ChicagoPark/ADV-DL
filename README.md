@@ -356,8 +356,32 @@ When we use Fully connected model which only has linear layer, it can be overfit
 > > To reduce the size of feature map to do model compression. (maintaining W and H of the input size.)
 
 
+### [3-2] Convolution-parameters
+* Padding: (1) to keep the image resolution(avoid kernel size is getting too smaller), (2) to do more convolution operation from the edge elements
 
-# `Lec 5: 0:30:30 : 2022-05-08`
+* Stride: make convolution operation faster.
+> Unclear output size with striding: can be floating number. We round down it(We don't consider the operation that is done from the outside of the input data).
+> 
+> > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167324735-d7d8914a-fa71-445a-97a1-a68edd358354.png">
+
+* Grouping: group certain number of input channel and the same number of output channel together. We split input channels into g groups. Then, we only connect input channels with output channels of the same group. (We do not have connection that cross groups.)
+
+> It allows us reducing parameters and computation by factor g.
+>
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167325279-e376fefe-e0ff-4bd7-b692-b45592e4448c.png">
+
+* Depthwise convolution: the number of groups are equal to number of channel
+
+> Often and only used from small and efficient network
+>
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167325700-6e4ef6b7-b749-4d21-9708-96dcd4115119.png">
+
+
+
+
+----
+
+# `Lec 5: 1:00:00 : 2022-05-09`
 
 ----
 
