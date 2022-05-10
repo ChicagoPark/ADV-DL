@@ -231,7 +231,7 @@ When we use Fully connected model which only has linear layer, it can be overfit
 
 # TODO: Create network
 
-# TODO: Create optimizer
+# TODO: Create optimizer (optimizer decides how to optimize the model using the deriavtive values of loss function.)
 
 # TODO: Create loss function
 
@@ -362,13 +362,13 @@ When we use Fully connected model which only has linear layer, it can be overfit
 * Stride: make convolution operation faster.
 > Unclear output size with striding: can be floating number. We round down it(We don't consider the operation that is done from the outside of the input data).
 > 
-> > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167324735-d7d8914a-fa71-445a-97a1-a68edd358354.png">
+> > <img width="450" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167324735-d7d8914a-fa71-445a-97a1-a68edd358354.png">
 
 * Grouping: group certain number of input channel and the same number of output channel together. We split input channels into g groups. Then, we only connect input channels with output channels of the same group. (We do not have connection that cross groups.)
 
 > It allows us reducing parameters and computation by factor g.
 >
-> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167325279-e376fefe-e0ff-4bd7-b692-b45592e4448c.png">
+> <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167325279-e376fefe-e0ff-4bd7-b692-b45592e4448c.png">
 
 * Depthwise convolution: the number of groups are equal to number of channel
 
