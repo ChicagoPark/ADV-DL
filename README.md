@@ -339,7 +339,7 @@ When we use Fully connected model which only has linear layer, it can be overfit
 
 ## [3] Convolutional Neural Network
 
-### [3-0] The problem of FCL for image processing
+### [CNN - The problem of FCL for image processing]
 > <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167284388-c8f105de-0053-4ac4-8e7f-f48431b631b4.png">
 > 
 > > <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167284471-70588bfe-1cf6-4b58-a757-a318c1750525.png">
@@ -348,7 +348,7 @@ When we use Fully connected model which only has linear layer, it can be overfit
 > > 
 > > (Bad reason 2) Lots of parameters are required in training process.
 
-### [3-1] Convolutions
+### [CNN - Convolutions]
 > `Sliding` linear transformation
 > > > <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167284715-803aa68c-becf-47fe-addb-41b365145bd4.png">
 > 
@@ -356,7 +356,7 @@ When we use Fully connected model which only has linear layer, it can be overfit
 > > To reduce the size of feature map to do model compression. (maintaining W and H of the input size.)
 
 
-### [3-2] Convolution-parameters
+### [CNN - Convolution-parameters]
 * Padding: (1) to keep the image resolution(avoid kernel size is getting too smaller), (2) to do more convolution operation from the edge elements
 
 * Stride: make convolution operation faster.
@@ -376,12 +376,44 @@ When we use Fully connected model which only has linear layer, it can be overfit
 >
 > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167325700-6e4ef6b7-b749-4d21-9708-96dcd4115119.png">
 
+### [CNN - Pooling]
+> presereve the channel
+
+##### (1) Average Pooling: `Linear layer`
+> In each channel, it computes the mean of all possible x, y location in side of the kernel.
+>
+> Reason of using: To reduce the dimensionality of feature map
+>
+> `Older networks`: Put the average pooling layer inside a network. Usually, Conv Layer has just 1 stride value. Thus, Pooling layer was used to reduce the dimensionality.
+>
+> If we do Avg Pool before we do Conv Layer, this's combining `two linear operations(Pooling and Conv Operation)`. => Inefficient
+> 
+> `Why we rarely put` the average pooling layer inside of the network?
+> > Conv Layer can do exactly the same job as Avg Pooling layer more efficiently.
+>
+> Usage of Avg Pooling in Modern networks
+> > Use Global average pooling layer at the very end of the network.
+> 
+> `Global average pooling`: produce one single spatial output that has same number of channels as the input channels of average pooling.
+> 
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167761686-1454ad15-3194-4c17-b40a-036804c93d27.png">
+
+> > Then we can use Global average pooling output from Linear layer to classify
+> > Average Pooling layer is not used at the middle position of the network.
+
+##### (2) Max Pooling: `Non-Linear layer`
+<img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167761841-78be228d-9efc-4974-887d-bbdcc5577290.png">
+
+> `Purpose` of max pooling: Down-sampling in modern neural network. (We can use Max Pooling `inside` of the network.)
+> 
+> [Modern modeling]
+> > Conv layer stride with 1 unit, then network reduces the sample size from Max Pooling Layer.
 
 
 
 ----
 
-# `Lec 5: 1:00:00 : 2022-05-09`
+# `Lec 5: 1:13:11 : 2022-05-11`
 
 ----
 
