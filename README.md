@@ -470,20 +470,20 @@ The pixel at the center can influence more than the pixel at the edge.
   * 
   * `Exception`: First layer up to 7X7 (Reason of exception: First layers with 7X7 kernel size allows us to capture more interesting patterns in the input image itself.)
 
-> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167978054-fd417e28-3083-492c-8d11-5b5f38557c9f.png">
+> <img width="150" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167978054-fd417e28-3083-492c-8d11-5b5f38557c9f.png">
 
 ##### [3] Use repeat patterns
  * First layer or two are special. So we can set paramters sophisticatedly.
- * 
+ 
  * However, all other layers usually follow a fixed pattern, because setting all the hyperparameters for all layers are so overwhelming.
 
 ##### [4] Keep all network convolutional] 
 > Use Avg Pooling layer at the end.
 [Benefits]
  * Fewer parameters
- * 
+ 
  * Better training signal
- * 
+ 
  * Ensemble voting effect for testing
  
 > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167979391-708665f5-cfd0-4e4c-b182-ebf4c1d6243a.png">
