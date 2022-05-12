@@ -328,7 +328,7 @@ When we use Fully connected model which only has linear layer, it can be overfit
 > ##### `Which activation to choose?`
 > > <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166893493-c263b50b-547f-4e68-b781-ae0c66ba7c0d.png">
 > >
-> > Try to use `ReLU first`. If you have a problem with Dead ReLU, we can try `Leaky ReLU`, and if Leadky ReLU works, try to use `PReLU`.
+> > Try to use `ReLU first`. If you have a problem with Dead ReLU, we can try `Leaky ReLU`, and if Leaky ReLU works, try to use `PReLU`.
 > > 
 > > sigmoid and tanh are usually used in Natural language process or RNN.
 
@@ -339,7 +339,7 @@ When we use Fully connected model which only has linear layer, it can be overfit
 > <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166894368-990121d0-6d63-4f55-a4bc-b67ca5316b5e.png">
 
 * MSELoss is also referred to as L2Loss
-* 
+ 
 * Momentum is 0.9 in most practice.
 
 ----
@@ -392,7 +392,7 @@ When we use Fully connected model which only has linear layer, it can be overfit
 > presereve the channel
 
 ##### (1) Average Pooling: `Linear layer`
-> In each channel, it computes the mean of all possible x, y location in side of the kernel.
+> In each channel, it computes the mean of all possible x, y location inside of the kernel.
 >
 > Reason of using: To reduce the dimensionality of feature map
 >
@@ -406,15 +406,15 @@ When we use Fully connected model which only has linear layer, it can be overfit
 > Usage of Avg Pooling in Modern networks
 > > Use Global average pooling layer at the very end of the network.
 > 
-> `Global average pooling`: produce one single spatial output that has same number of channels as the input channels of average pooling.
+> `Global average pooling`: produce `one single spatial output` that has same number of channels as the input channels of average pooling.
 > 
-> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167761686-1454ad15-3194-4c17-b40a-036804c93d27.png">
+> <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167761686-1454ad15-3194-4c17-b40a-036804c93d27.png">
 
 > > Then we can use Global average pooling output from Linear layer to classify
 > > Average Pooling layer is not used at the middle position of the network.
 
 ##### (2) Max Pooling: `Non-Linear layer`
-> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167761841-78be228d-9efc-4974-887d-bbdcc5577290.png">
+> <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167761841-78be228d-9efc-4974-887d-bbdcc5577290.png">
 
 > `Purpose` of max pooling: Down-sampling in modern neural network. (We can use Max Pooling `inside` of the network.)
 > 
@@ -459,16 +459,16 @@ The pixel at the center can influence more than the pixel at the edge.
 
 ### [CNN - `Model Design Principles`]
 ##### [1] Use striding(downsample activation map), increase channel. It helps balance some of the computation that held inside of deep neural network.
-* Striding by 2 and increase the number of channel by the factor of 2, this will make sure all the convolusions have roughly the same number of operation throughout the network.
+* Striding by 2 and increase the number of channel by the factor of 2, this will make sure all the convolusions have `roughly the same number of operation` throughout the network.
 >
 > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167977239-582a241d-5507-4a85-9ae4-86994142a04c.png">
 
 ##### [2] Keep kernels small
   * 3 X 3 Kernels almost everywhere
-  * 
+   
   * Reason: (1) Small kernel size with deep network has a benefit in the number of parameters., (2) We can put more non-linearity between 3X3 Kernel
-  * 
-  * `Exception`: First layer up to 7X7 (Reason of exception: First layers with 7X7 kernel size allows us to capture more interesting patterns in the input image itself.)
+   
+  * `Exception`: First layer up to 7X7 (Reason of exception: First layers with 7X7 kernel size allows us to `capture more interesting patterns` in the input image itself.)
 
 > <img width="150" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167978054-fd417e28-3083-492c-8d11-5b5f38557c9f.png">
 
@@ -479,6 +479,7 @@ The pixel at the center can influence more than the pixel at the edge.
 
 ##### [4] Keep all network convolutional] 
 > Use Avg Pooling layer at the end.
+
 [Benefits]
  * Fewer parameters
  
