@@ -70,6 +70,13 @@ Advanced Deep Learning
 
 ## [2] Neural Network Modeling
 
+```python
+# Type the below to notice what is necessary arguments
+?torch.nn.Linear
+?torch.nn.Conv2d
+?torch.nn.MaxPool2d
+```
+
 ### [2-1] Classifier
 
 > #### (1) The `limitation of linear classifier`: we cannot solve the problem which `requires curve` to classify two groups
@@ -356,13 +363,18 @@ When we use Fully connected model which only has linear layer, it can be overfit
 > > To reduce the size of feature map to do model compression. (maintaining W and H of the input size.)
 
 
-### [CNN - Convolution-parameters]
+### [CNN - Convolution-parameters: Padding, Stride, and Grouping]
 * Padding: (1) to keep the image resolution(avoid kernel size is getting too smaller), (2) to do more convolution operation from the edge elements
+
+> How to avoid the size of feature map is shrinking by adjusting padding size?
+> 
+> `padding = (kernel_size-1)//2`
 
 * Stride: make convolution operation faster.
 > Unclear output size with striding: can be floating number. We round down it(We don't consider the operation that is done from the outside of the input data).
 > 
 > > <img width="450" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167324735-d7d8914a-fa71-445a-97a1-a68edd358354.png">
+
 
 * Grouping: group certain number of input channel and the same number of output channel together. We split input channels into g groups. Then, we only connect input channels with output channels of the same group. (We do not have connection that cross groups.)
 
@@ -402,20 +414,86 @@ When we use Fully connected model which only has linear layer, it can be overfit
 > > Average Pooling layer is not used at the middle position of the network.
 
 ##### (2) Max Pooling: `Non-Linear layer`
-<img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167761841-78be228d-9efc-4974-887d-bbdcc5577290.png">
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167761841-78be228d-9efc-4974-887d-bbdcc5577290.png">
 
 > `Purpose` of max pooling: Down-sampling in modern neural network. (We can use Max Pooling `inside` of the network.)
 > 
 > [Modern modeling]
 > > Conv layer stride with 1 unit, then network reduces the sample size from Max Pooling Layer.
 
+### [CNN - Modeling]
+
+```python
+class ConvNet2(torch.nn.Module):
+    def __init__(self, layers=[], n_input_channels=3, kernel_size=3, stride=2):
+        super().__init__()
+        L = []
+        c = n_input_channels
+        for l in layers:
+            L.append(torch.nn.Conv2d(c, l, kernel_size, padding=(kernel_size-1)//2))
+            L.append(torch.nn.ReLU())
+            L.append(torch.nn.MaxPool2d(3, padding=1, stride=stride))
+            # L.append(torch.nn.MaxPool2d(2*stride-1, padding=stride-1, stride=stride))
+            # "2*stride-1" kernel size guarantees whatever stride we have, we always pool over all input in our activation map.
+            c = l
+        L.append(torch.nn.Conv2d(c, 1, kernel_size=1))
+        self.layers = torch.nn.Sequential(*L)
+    
+    def forward(self, x):
+        return self.layers(x).mean([1,2,3])
+
+net3 = ConvNet2([32,64,128])
+```
+
+### [CNN - Receptive fields]
+> The receptive field is defined as the region in the `input space` that a `particular CNN’s feature(kernel) is looking at` (i.e. be affected by).
+> 
+> However, not all pixels in a receptive field is equally important to its corresponding CNN’s feature.
+> Within a receptive field, the closer a pixel to the `center of the field`, the more it contributes to the calculation of the output feature.
+> 
+The pixel at the center can influence more than the pixel at the edge.
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167976356-b9a49047-1348-47c6-b601-5948bb2575a7.png">
+
+> Therefore, pixels at the center of receptive field have much higher weight on the output decision than the side one.
+
+
+### [CNN - `Model Design Principles`]
+##### [1] Use striding(downsample activation map), increase channel. It helps balance some of the computation that held inside of deep neural network.
+* Striding by 2 and increase the number of channel by the factor of 2, this will make sure all the convolusions have roughly the same number of operation throughout the network.
+>
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167977239-582a241d-5507-4a85-9ae4-86994142a04c.png">
+
+##### [2] Keep kernels small
+  * 3 X 3 Kernels almost everywhere
+  * 
+  * Reason: (1) Small kernel size with deep network has a benefit in the number of parameters., (2) We can put more non-linearity between 3X3 Kernel
+  * 
+  * `Exception`: First layer up to 7X7 (Reason of exception: First layers with 7X7 kernel size allows us to capture more interesting patterns in the input image itself.)
+
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167978054-fd417e28-3083-492c-8d11-5b5f38557c9f.png">
+
+##### [3] Use repeat patterns
+ * First layer or two are special. So we can set paramters sophisticatedly.
+ * 
+ * However, all other layers usually follow a fixed pattern, because setting all the hyperparameters for all layers are so overwhelming.
+
+##### [4] Keep all network convolutional] 
+> Use Avg Pooling layer at the end.
+[Benefits]
+ * Fewer parameters
+ * 
+ * Better training signal
+ * 
+ * Ensemble voting effect for testing
+ 
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167979391-708665f5-cfd0-4e4c-b182-ebf4c1d6243a.png">
 
 
 ----
 
-# `Lec 5: 1:13:11 : 2022-05-11`
+# `Lec 5: 1:48:40 : 2022-05-12`
 
-----
+--------
 
 ## [] PyTorch
 #### [ -1] Basic tensor
@@ -474,7 +552,7 @@ tensor_to_image = transforms.ToPILImage()
 tensor_to_image(image_tensor)
 ```
 
-#### [ -3] Neural Network
+#### [ -3] Linear Neural Network
 ```python
 class Network1(torch.nn.Module):
     def __init__(self, n_hidden=100):
@@ -578,6 +656,30 @@ for epoch in range(n_epochs):
     train_logger.add_scalar('train/accuracy', np.mean(train_accuracy), global_step=global_step)
     # TODO: Log validation accuracy
     valid_logger.add_scalar('valid/accuracy', valid_accuracy, global_step=global_step)
+```
+
+#### [ -5] Convolutional Neural Network
+
+```python
+class ConvNet2(torch.nn.Module):
+    def __init__(self, layers=[], n_input_channels=3, kernel_size=3, stride=2):
+        super().__init__()
+        L = []
+        c = n_input_channels
+        for l in layers:
+            L.append(torch.nn.Conv2d(c, l, kernel_size, padding=(kernel_size-1)//2))
+            L.append(torch.nn.ReLU())
+            L.append(torch.nn.MaxPool2d(3, padding=1, stride=stride))
+            # L.append(torch.nn.MaxPool2d(2*stride-1, padding=stride-1, stride=stride))
+            # "2*stride-1" kernel size guarantees whatever stride we have, we always pool over all input in our activation map.
+            c = l
+        L.append(torch.nn.Conv2d(c, 1, kernel_size=1))
+        self.layers = torch.nn.Sequential(*L)
+    
+    def forward(self, x):
+        return self.layers(x).mean([1,2,3])
+
+net3 = ConvNet2([32,64,128])
 ```
 
 #### [ - ] Tensorboard
