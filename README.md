@@ -71,7 +71,7 @@ Advanced Deep Learning
 ## [2] Neural Network Modeling
 
 ```python
-# Type the below to notice what is necessary arguments
+# Type the below to figure out what is necessary arguments
 ?torch.nn.Linear
 ?torch.nn.Conv2d
 ?torch.nn.MaxPool2d
