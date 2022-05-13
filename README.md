@@ -468,7 +468,7 @@ The pixel at the center can influence more than the pixel at the edge.
    
   * Reason: (1) Small kernel size with deep network has a benefit in the number of parameters., (2) We can put more non-linearity between 3X3 Kernel
    
-  * `Exception`: First layer up to 7X7 (Reason of exception: First layers with 7X7 kernel size allows us to `capture more interesting patterns` in the input image itself.)
+  * `Exception`: First layer up to 7X7 (Reason of exception: First layers with 7X7 kernel size allows us to `capture more interesting patterns` from the high resolution input image itself.)
 
 > <img width="150" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167978054-fd417e28-3083-492c-8d11-5b5f38557c9f.png">
 
@@ -492,7 +492,7 @@ The pixel at the center can influence more than the pixel at the edge.
 
 ----
 
-# `Lec 5: 1:48:40 : 2022-05-12`
+# `Lec 5: 2:02:08 : 2022-05-13`
 
 --------
 
@@ -681,6 +681,44 @@ class ConvNet2(torch.nn.Module):
         return self.layers(x).mean([1,2,3])
 
 net3 = ConvNet2([32,64,128])
+```
+
+```python
+class ConvNet(torch.nn.Module):
+    class Block(torch.nn.Module):
+        def __init__(self, n_input, n_output, stride=1):
+            super().__init__()
+            self.net = torch.nn.Sequential(
+              torch.nn.Conv2d(n_input, n_output, kernel_size=3, padding=1, stride=stride),
+              torch.nn.ReLU(),
+              torch.nn.Conv2d(n_output, n_output, kernel_size=3, padding=1),
+              torch.nn.ReLU()
+            )
+        
+        def forward(self, x):
+            return self.net(x)
+        
+    def __init__(self, layers=[32,64,128], n_input_channels=3): # layers have the number of channels
+        super().__init__()
+        L = [torch.nn.Conv2d(n_input_channels, 32, kernel_size=7, padding=3, stride=2),
+             torch.nn.ReLU(),
+             torch.nn.MaxPool2d(kernel_size=3, stride=2, padding=1)]
+        c = 32
+        for l in layers:
+            L.append(self.Block(c, l, stride=2))
+            c = l
+        self.network = torch.nn.Sequential(*L)
+        self.classifier = torch.nn.Linear(c, 1)
+    
+    def forward(self, x):
+        # Compute the features
+        z = self.network(x)       # torch.Size([10, 3, 128, 128])
+        # Global average pooling
+        z = z.mean(dim=[2,3])     # torch.Size([10, 128])
+        # Classify
+        return self.classifier(z)[:,0] # [:,0] removes one dimension
+
+net = ConvNet()
 ```
 
 #### [ - ] Tensorboard
