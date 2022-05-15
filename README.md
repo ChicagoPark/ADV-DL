@@ -490,9 +490,41 @@ The pixel at the center can influence more than the pixel at the edge.
 > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167979391-708665f5-cfd0-4e4c-b182-ebf4c1d6243a.png">
 
 
+### [CNN - `What do networks learn?`]
+> (1) `The filter at the First layer`:
+local features: edges, texture patterns, color, 
+
+(2) `The filter at the Middle layer`:
+combined local features
+
+(3) `The filter at the Final Layer`:
+color features of eyes or nose or tongue or head.
+
+
+
+### [CNN - `Segmentation`]
+> Label all the pixel as `Dog` or `Not Dog`
+> 
+> Issue: we need to produce an output that has high resolution as high as input data
+> 
+> `Solution` to increase receptive field
+> (1) Only use Convolutional Layer
+> 
+> (2) Use ReLU
+>
+> (3) Don't use striding from any units
+> 
+> (4) Use wider kernel size
+
+Using striding, we can increase the receptive field effectively
+
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168454395-1fa9c6c0-aefa-4248-b822-78dcb5942449.png">
+
+
+
 ----
 
-# `Lec 5: 2:02:08 : 2022-05-13`
+# `Lec 5: 2:29:00 : 2022-05-15`
 
 --------
 
