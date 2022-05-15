@@ -491,7 +491,7 @@ The pixel at the center can influence more than the pixel at the edge.
 
 
 ### [CNN - `What do networks learn?`]
-> (1) `The filter at the First layer`:
+(1) `The filter at the First layer`:
 local features: edges, texture patterns, color, 
 
 (2) `The filter at the Middle layer`:
@@ -503,24 +503,77 @@ color features of eyes or nose or tongue or head.
 
 
 ### [CNN - `Segmentation`]
-> Label all the pixel as `Dog` or `Not Dog`
+> Label all the pixel as `Dog(1)` or `Not Dog(0)`
+
+> ##### [1] `Issue`
+> > we need to produce an output that `has high resolution` as high as input data
+
+
+> ##### [2] `Solution` to increase receptive field
+> > (1) Only use Convolutional Layer
+> > 
+> > (2) Use ReLU
+> >
+> > (3-1) Non-striding and use big kernel size / (3-2)Striding by the factor of 2
+
+> ##### `Solution (3-1): Non-striding and use big kernel size`
+> > <img width="190" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168461393-1fd9859b-cf72-4e76-9cfe-20cd96f9d715.png">
+> > 
+> > Attribute: `Inefficient`. It can only increase the receptive field linearly by enlarging the kernel size.
+
+> ##### `Solution 2: Striding by the factor of 2`
+> > <img width="190" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168454395-1fa9c6c0-aefa-4248-b822-78dcb5942449.png">
+> > 
+> > Efficient. We can see the receptive field get much larger.
+> > ##### But, the `main issue` is `striding does lose resolution`.
+
+### [CNN - Segmentation - Dilation]
+> Way to virtually `inflate a kernel` `without` increasing number of parameters and computations.
+
+> ##### `Dilation process`
+> > Take a kernel and then `spread out` the original kernel. Then, `put the zero at the empty` elements in the enlarged kernel.
+> > 
+> > <img width="190" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168461516-de307060-b4dc-4a66-a54b-e712d1d8e186.png">
+
+> ##### `Dilation benefits`
+> > Dilation `can compute every single element` without losing resolution.
+> > 
+> <img width="190" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168461597-36312201-f8f2-42e7-8334-7e78e7c43a21.png">
 > 
-> Issue: we need to produce an output that has high resolution as high as input data
+> ##### [Process]
+> > First CNN layer is not dilated. Second CNN layer is dilated by two. Third CNN layer is dilated by four.
 > 
-> `Solution` to increase receptive field
-> (1) Only use Convolutional Layer
+> ##### [Benefit]
+> > It can have `larger receptive field`, but `compute every single element`. Then, can use CNN to produce high resolution output with a larger receptive field with an input image.
+
+
+### [CNN - Segmentation - Up-convolution]
+> We `dilate input data` and run `regular convolution` to the input data
 > 
-> (2) Use ReLU
+> <img width="190" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168461912-db59eec7-dea6-473c-9bda-133c4fe78580.png">
 >
-> (3) Don't use striding from any units
+> ##### `Advice in up-convolution`
+> > When we use up-convolution inside of our network, we have to `be careful` how to `set up the parameters and stride` value because `strided convolution round down`.
+>
+> ##### `How to fix for rounding down problems of strided convolution?`
+> > (1-not robust) avoid round operation through mathematical calculation of parameter.(Not good because it is impossible )
+> >
+> > (2-robust) Much better way detect whatever rounding happen, and then you can add a parameter call output_padding to our up-convolution.
+>
+> <img width="190" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168462449-860e007e-585d-46fd-97b7-7e5afb896782.png">
+
+> ##### `Where can we use Up-convolution in general?`
+> > Up-convlutions are `after used convolutions`.
+>
+> <img width="190" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168462681-4252336e-9e65-41fa-844c-d1cfba851e77.png">
 > 
-> (4) Use wider kernel size
+> <img width="190" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168463025-37ed4829-343d-4445-9fa1-cacee0286054.png">
 
-Using striding, we can increase the receptive field effectively
+> ##### `Skip connections`: Provides lower-level high-resolution features to output
+> > <img width="190" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168464957-b0482578-0756-4b9d-b1f0-a62996982eec.png">
 
-> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168454395-1fa9c6c0-aefa-4248-b822-78dcb5942449.png">
 
-
+The many names of up-convolution (1) Transpose convolution: When we implement up-convolution we multiply with the transpose of the matrix, (2) Fractionally strided convolutions
 
 ----
 
