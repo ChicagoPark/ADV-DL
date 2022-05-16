@@ -577,7 +577,86 @@ The many names of up-convolution (1) Transpose convolution: When we implement up
 
 ----
 
-# `Lec 5: 2:29:00 : 2022-05-15`
+## [4] Make a Network Better
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168528496-b87a45bd-2440-46ab-a6e9-c485980bf818.png">
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168537087-a5a13c12-fd60-47b5-b2f9-75fb0283158a.png">
+
+> `Look at your data`: set what task we need to solve. Recognize what is the hard part of the task and what is the easy part of the task. How much high level information we need? How much low level information we need? Can we borrow some representation from somewhere else? Or should we need to design the network from the scratch?
+
+[Cycle]
+`Evaluate your model on unseen data`: at this stage we are about 80 percent of `coding`. In terms of making our model works, just 10 percent done.
+From this process, we tune the model over and over again to perform better.
+(1) [Looking at the data] look at how well does this model perform on our data?(Where does this make mistakes? Where does it work?)
+(2) [Design and train your model] Modify property of learning algorithm, structure of our module, loss function, labels and so on. (No need to change code that much, just modify the model to improve.)
+(3) Evaluate
+
+
+Once we are happy with the performance of our model, we go out and test our model.
+
+### [Make Better - (1) Looking at the data]
+(1) look at random image
+![20220516_151915](https://user-images.githubusercontent.com/73331241/168530977-f73a7b0b-b08e-44b3-82ac-b9341d8862a8.png)
+
+(2) Smallest / largest file size
+Smallest file size - best way to check the availability of the image.
+![20220516_152104](https://user-images.githubusercontent.com/73331241/168531201-dba9f555-7a53-42b4-9775-e29c9d3237d0.png)
+
+Largest file size- best way to find the weird but special image
+![20220516_152046](https://user-images.githubusercontent.com/73331241/168531172-140af33f-09fc-46db-9bb0-4d637c840bb1.png)
+
+
+(3) Try to solve the `task manually`
+> Record our response with label, it would help us to recognize the error in labeling or data is very difficult to recognize.
+
+
+### [Make Better - (1) Looking at the data - dataset]
+(1) Training set (60-80% of data) - Learn model prameters
+(2) Validation set (10-20% of data) - Learn hyper-parameters
+(3) Test set (10-20% of data) - Measure generalization performance. Used exactly `once`.
+
+
+
+----
+
+# `Lec 5: 0:27:30 : 2022-05-16`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 --------
 
