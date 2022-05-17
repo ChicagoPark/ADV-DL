@@ -610,11 +610,21 @@ Largest file size- best way to find the weird but special image
 
 
 ### [Make Better - (1) Looking at the data - dataset]
-(1) Training set (60-80% of data) - Learn model prameters
-(2) Validation set (10-20% of data) - Learn hyper-parameters
-(3) Test set (10-20% of data) - Measure generalization performance. Used exactly `once`.
+> (1) Training set (60-80% of data) - Learn model prameters
+> 
+> (2) Validation set (10-20% of data) - Learn hyper-parameters
+> 
+> (3) Test set (10-20% of data) - Measure generalization performance. Used exactly `once`.
 
 
+
+### [Make Better - (2) Network initialization]
+What do we set the initial parameters to?
+
+[Idea 1. All zero]: Never use
+0 weights make all the output of activation as zero. Additionally, the gradients with respect to all weights in our network will be zero.
+
+[Idea 2. Constant]: Never use
 
 ----
 
