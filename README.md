@@ -595,14 +595,14 @@ Once we are happy with the performance of our model, we go out and test our mode
 
 ### [Make Better - (1) Looking at the data]
 (1) look at random image
-![20220516_151915](https://user-images.githubusercontent.com/73331241/168530977-f73a7b0b-b08e-44b3-82ac-b9341d8862a8.png)
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168530977-f73a7b0b-b08e-44b3-82ac-b9341d8862a8.png">
 
 (2) Smallest / largest file size
 Smallest file size - best way to check the availability of the image.
-![20220516_152104](https://user-images.githubusercontent.com/73331241/168531201-dba9f555-7a53-42b4-9775-e29c9d3237d0.png)
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168531201-dba9f555-7a53-42b4-9775-e29c9d3237d0.png">
 
 Largest file size- best way to find the weird but special image
-![20220516_152046](https://user-images.githubusercontent.com/73331241/168531172-140af33f-09fc-46db-9bb0-4d637c840bb1.png)
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168531172-140af33f-09fc-46db-9bb0-4d637c840bb1.png">
 
 
 (3) Try to solve the `task manually`
@@ -625,10 +625,20 @@ What do we set the initial parameters to?
 0 weights make all the output of activation as zero. Additionally, the gradients with respect to all weights in our network will be zero.
 
 [Idea 2. Constant]: Never use
+(1) all of the column in the first weight matrix will have the same value
+(2) does not break symmetries
+
+[Idea 3. Random initialization]: the best
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168709391-600922c6-ed2c-4f51-a693-2c09f10a9dc6.png">
+
+Either using normal distribution or uniform distribution, we need to set mean and certain standard deviation(multiplying with time identity).
+
+
+
 
 ----
 
-# `Lec 5: 0:27:30 : 2022-05-16`
+# `Lec 5: 0:51:40 : 2022-05-17`
 
 
 
