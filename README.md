@@ -357,7 +357,7 @@ When we use Fully connected model which only has linear layer, it can be overfit
 
 ### [CNN - Convolutions]
 > `Sliding` linear transformation
-> > > <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167284715-803aa68c-becf-47fe-addb-41b365145bd4.png">
+> > <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/167284715-803aa68c-becf-47fe-addb-41b365145bd4.png">
 > 
 > Why `1X1 convolution kernel` is necessary?
 > > To reduce the size of feature map to do model compression. (maintaining W and H of the input size.)
@@ -446,7 +446,7 @@ net3 = ConvNet2([32,64,128])
 ```
 
 ### [CNN - Receptive fields]
-> The receptive field is defined as the region in the `input space` that a `particular CNN’s feature(kernel) is looking at` (i.e. be affected by).
+> The receptive field is defined as the region in the `input space` that a `particular CNN’s feature is looking at` (i.e. be affected by).
 > 
 > However, not all pixels in a receptive field is equally important to its corresponding CNN’s feature.
 > Within a receptive field, the closer a pixel to the `center of the field`, the more it contributes to the calculation of the output feature.
@@ -581,13 +581,16 @@ The many names of up-convolution (1) Transpose convolution: When we implement up
 > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168528496-b87a45bd-2440-46ab-a6e9-c485980bf818.png">
 > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168537087-a5a13c12-fd60-47b5-b2f9-75fb0283158a.png">
 
-> `Look at your data`: set what task we need to solve. Recognize what is the hard part of the task and what is the easy part of the task. How much high level information we need? How much low level information we need? Can we borrow some representation from somewhere else? Or should we need to design the network from the scratch?
+> `Look at your data`: set what task `we need to solve`. Recognize `what is the hard part` of the task and what is the `easy part` of the task. How much `high level information` we need? How much `low level information` we need? Can we `borrow some representation` from somewhere else? Or should we need to design the `network from the scratch`?
 
-[Cycle]
+`[Cycle]`
 `Evaluate your model on unseen data`: at this stage we are about 80 percent of `coding`. In terms of making our model works, just 10 percent done.
 From this process, we tune the model over and over again to perform better.
-(1) [Looking at the data] look at how well does this model perform on our data?(Where does this make mistakes? Where does it work?)
-(2) [Design and train your model] Modify property of learning algorithm, structure of our module, loss function, labels and so on. (No need to change code that much, just modify the model to improve.)
+
+(1) [Looking at the data] look at `how well does this model` perform on our data?(Where does this make mistakes? Where does it work?)
+
+(2) [Design and train your model] Modify property of `learning algorithm, structure of our module, loss function, labels` and so on. (No need to change code that much, just modify the model to improve.)
+
 (3) Evaluate
 
 
@@ -606,7 +609,7 @@ Largest file size- best way to find the weird but special image
 
 
 (3) Try to solve the `task manually`
-> Record our response with label, it would help us to recognize the error in labeling or data is very difficult to recognize.
+> Record `our response` with label, it would help us to recognize the `error in labeling or the difficulty of the data` to recognize.
 
 
 ### [Make Better - (1) Looking at the data - dataset]
@@ -629,7 +632,7 @@ What do we set the initial parameters to?
 (2) does not break symmetries
 
 [Idea 3. Random initialization]: the best
-> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168709391-600922c6-ed2c-4f51-a693-2c09f10a9dc6.png">
+> <img width="95" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168709391-600922c6-ed2c-4f51-a693-2c09f10a9dc6.png">
 
 Either using normal distribution or uniform distribution, we need to set mean and certain standard deviation(multiplying with time identity).
 
