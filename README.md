@@ -637,35 +637,69 @@ What do we set the initial parameters to?
 Either using normal distribution or uniform distribution, we need to set mean and certain standard deviation(multiplying with time identity).
 
 
+### [Make Better - (2) Network initialization - Random initialization]
+
+magnitude of standard deviation is directly related to the magnitude of weights
+
+it heavily affect on gradient decent training process
+
+##### `Random initialization - How do we scale the initialization?`
+* By hand
+  * A lot of tuning for deep neural network
+
+* Automatically
+  * A lot of math
+
+##### `Xavier and Kaiming initialization`
+* Strategy to set `variance` of `Normal or Uniform initialization`
+  * Set all activations are of similar scale and set all gradients are of similar scale
+
+* How do we compute the scale of activation without knowing what is the inputs?
+
+  * Random matrix multiplication
+  > use it to analyze the behavior of random initialization 
+
+
+How to initialize the weight
+
+we just care about the magnitude of input z
+
+it just depends on 
+
+
+can calculate how large certain activation will be for every linear layer
+
+
+
+* Initialization in practice
+  * Xavier (default) is often good enough
+  * Initialize last layer to zero.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ----
 
 # `Lec 5: 0:51:40 : 2022-05-17`
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
