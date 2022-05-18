@@ -621,8 +621,8 @@ Largest file size- best way to find the weird but special image
 
 
 
-### [Make Better - (2) Network initialization]
-What do we set the initial parameters to?
+### [Make Better - (2) Network initialization - weight]
+What do we set the initial parameters(weight) to?
 
 [Idea 1. All zero]: Never use
 0 weights make all the output of activation as zero. Additionally, the gradients with respect to all weights in our network will be zero.
@@ -634,48 +634,67 @@ What do we set the initial parameters to?
 [Idea 3. Random initialization]: the best
 > <img width="95" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168709391-600922c6-ed2c-4f51-a693-2c09f10a9dc6.png">
 
-Either using normal distribution or uniform distribution, we need to set mean and certain standard deviation(multiplying with time identity).
+
+### `IMPORTANT BACKGROUND`
+
+* `Initialize weights` through: `Normal distribution` or `Uniform distrubution`
+
+* How to `set mean and standard deviation of Normal distribution or Uniform distrubution`: `Xavier and Kaiming initialization`
+
+* `For simplicity mean and bias are set by 0.` So we need to care about `standard deviation`
+
+> > Since `magnitude of standard deviation` is `directly related` to the `magnitude of weights`, it is important to select the proper value. (It heavily affect on gradient decent training process, so single weight can impact on other layers.)
 
 
-### [Make Better - (2) Network initialization - Random initialization]
+### Random initialization - `Xavier and Kaiming initialization`
 
-magnitude of standard deviation is directly related to the magnitude of weights
-
-it heavily affect on gradient decent training process
-
-##### `Random initialization - How do we scale the initialization?`
-* By hand
-  * A lot of tuning for deep neural network
-
-* Automatically
-  * A lot of math
-
-##### `Xavier and Kaiming initialization`
 * Strategy to set `variance` of `Normal or Uniform initialization`
   * Set all activations are of similar scale and set all gradients are of similar scale
 
-* How do we compute the scale of activation without knowing what is the inputs?
+* How do we compute the scale of activation without knowing what is the inputs without seeing the data just by initializing the weights?
+> Random matrix multiplication
 
-  * Random matrix multiplication
-  > use it to analyze the behavior of random initialization 
+* Random matrix multiplication
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168965741-994c860b-c122-4fde-a799-34731c73bc40.png">
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168966251-52f2bf69-9661-4f47-bd0e-d3edebeeae9a.png">
+> 
+> `vector a` is drawn from normal distribution with a certain mean and certain standard deviation.
+
+> We can multiply vector a with an arbitrary vector(input vector), then the output will follow the normal distribution because of vector a. (The only thing we need is that the magnitude of input not the actual distribution.)
+
+* Random matrix multiplication in Linear Layer (z_i)
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168967425-fb863838-ab67-404c-96b4-5ce631993067.png">
+
+> when we initialize the linear layer with a random normal distribution, we can guarantee that the output follows random normal distribution
 
 
-How to initialize the weight
+* Random matrix multiplication in Activation Layer (z_i+1 )
+> Since half of the output from ReLU is zero, we can see 1/2 from the expection.
 
-we just care about the magnitude of input z
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168968986-8c64088d-2569-4f94-b723-0026f232e30f.png">
 
-it just depends on 
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168971915-2d5fcb4e-7ad3-48f7-a7a2-2eab475a3dd7.png">
+
+By using it, we can know how it is large certain activation will be at the any linear layer
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168972285-469be201-6a76-4332-aeb5-3faf54439f04.png">
+
+The above formula is almost same from the backpropagation as well. (just the propagation's direction is different)
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168972503-5f970e5c-306a-4d10-b251-53f6101465ae.png">
+
+> Try to keep the magnitude of activation the magnitude of gradient as constant as possible to learn with same rate.
 
 
-can calculate how large certain activation will be for every linear layer
+* Xavier initialization - default in PyTorch
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168974920-55e3ea94-63ba-491b-b243-5f1f928c67b3.png">
 
+* Kaiming initialization
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/168975233-c574735b-3657-49c5-8013-d8ba4c9011cd.png">
 
 
 * Initialization in practice
   * Xavier (default) is often good enough
+  
   * Initialize last layer to zero.
-
-
 
 
 
@@ -699,16 +718,7 @@ can calculate how large certain activation will be for every linear layer
 
 ----
 
-# `Lec 5: 0:51:40 : 2022-05-17`
-
-
-
-
-
-
-
-
-
+# `Lec 5: 1:20:00 : 2022-05-17`
 
 
 
