@@ -710,7 +710,10 @@ The above formula is almost same from the backpropagation as well. (just the pro
 > > Depends on the input data, the training performance at the first layer
 
 
-
+> Possible problem with inappropriate input
+> > Big scale of input: Big scale input can update hugely, but small scale will not affect that much. It would be followed by unstable training.
+> > 
+> > Postiive value of input: Update direction has a limitation. Could be updated in one direction(+ or -).
 
 
 
