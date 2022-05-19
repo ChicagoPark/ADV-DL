@@ -621,7 +621,7 @@ Largest file size- best way to find the weird but special image
 
 
 
-### [Make Better - (2) Network initialization - weight]
+### [Make Better - (2) Network weight initialization]
 What do we set the initial parameters(weight) to?
 
 [Idea 1. All zero]: Never use
@@ -645,8 +645,7 @@ What do we set the initial parameters(weight) to?
 
 > > Since `magnitude of standard deviation` is `directly related` to the `magnitude of weights`, it is important to select the proper value. (It heavily affect on gradient decent training process, so single weight can impact on other layers.)
 
-
-### Random initialization - `Xavier and Kaiming initialization`
+### [Make Better - Random weight initialization - `Xavier and Kaiming initialization`]
 
 * Strategy to set `variance` of `Normal or Uniform initialization`
   * Set all activations are of similar scale and set all gradients are of similar scale
@@ -697,15 +696,18 @@ The above formula is almost same from the backpropagation as well. (just the pro
   * Initialize last layer to zero.
 
 
+### [Make Better - `Optimization`]
+
+`Goals`
+
+> (1) Convergence speed, (2) Training accuracy, (3) Generalization performance (getting a good accuracy on our validation set)
 
 
+### [Make Better - `Input data normalization`]
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/169199374-0315e168-4e91-4017-8fb8-5322b0e4633a.png">
 
-
-
-
-
-
-
+> Reason of Input data normalization
+> > Depends on the input data, the training performance at the first layer
 
 
 
@@ -718,7 +720,7 @@ The above formula is almost same from the backpropagation as well. (just the pro
 
 ----
 
-# `Lec 5: 1:20:00 : 2022-05-17`
+# `Lec 5: 1:38:45 : 2022-05-19`
 
 
 
