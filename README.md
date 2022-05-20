@@ -716,6 +716,51 @@ The above formula is almost same from the backpropagation as well. (just the pro
 > > Postiive value of input: Update direction has a limitation. Could be updated in one direction(+ or -).
 
 
+Exploding gradients
+> Weight of `one layer` grows (Causes bad feedback loop)
+> 
+> > `Gradient of all` other layers grow
+> > 
+> > `Weights of other` layers grow
+
+> Not a bit issue for most networks
+
+> An issue for recurrent networks, and networks that share parameters across layers
+(because we apply same operation over and over again)
+
+
+
+Vanishing gradients
+> Weight of `one layer` shrink (Causes no progress or very very slow convergence)
+> 
+> > `Gradient of all` other layers shrink
+> > 
+> > `Weights of other` layers stay constant
+
+> Big issue for larger networks
+
+> Issue for recurrent networks and weights tied across layers
+
+
+`How to detect` vanishing gradients
+> Plot loss
+> 
+> Plot weight and gradient magitude per layer
+> 
+> > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/169432701-0d4d858e-da24-43ca-a9fa-7b555e8bb0a5.png">
+
+
+if any layer's magintude of gradient is smaller than the magintude of weight, then we can notice the vanishing gradient at that layer
+
+
+
+Normalization
+How to prevent vanishing (or exploding) gradients?
+
+inserting layers either before or after the Conv layers that scaled up(for vanishing grad) or scaled down(for exploding grad) the activation
+
+
+
 
 
 
@@ -723,7 +768,7 @@ The above formula is almost same from the backpropagation as well. (just the pro
 
 ----
 
-# `Lec 5: 1:38:45 : 2022-05-19`
+# `Lec 5: 1:52:00 : 2022-05-20`
 
 
 
