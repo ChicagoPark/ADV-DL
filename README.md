@@ -647,7 +647,7 @@ What do we set the initial parameters(weight) to?
 
 ### [Make Better - Random weight initialization - `Xavier and Kaiming initialization`]
 
-* Strategy to set `variance` of `Normal or Uniform initialization`
+* Strategy to set `standard variance` of `Normal or Uniform initialization`
   * Set all activations are of similar scale and set all gradients are of similar scale
 
 * How do we compute the scale of activation without knowing what is the inputs without seeing the data just by initializing the weights?
@@ -750,11 +750,11 @@ Vanishing gradients
 > > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/169432701-0d4d858e-da24-43ca-a9fa-7b555e8bb0a5.png">
 
 
-if any layer's magintude of gradient is smaller than the magintude of weight, then we can notice the vanishing gradient at that layer
+If any layer's magintude of gradient is smaller than the magintude of weight, then we can notice the vanishing gradient at that layer
 
 
+'Normalization'
 
-Normalization
 How to prevent vanishing (or exploding) gradients?
 
 inserting layers either before or after the Conv layers that scaled up(for vanishing grad) or scaled down(for exploding grad) the activation
@@ -769,11 +769,6 @@ inserting layers either before or after the Conv layers that scaled up(for vanis
 ----
 
 # `Lec 5: 1:52:00 : 2022-05-20`
-
-
-
-
-
 
 --------
 
