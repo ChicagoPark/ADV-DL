@@ -280,7 +280,7 @@ When we use Fully connected model which only has linear layer, it can be overfit
 > > The output of activation function goes in to output layer: `feature`
 
 
-### [2-10] Non-linearities (activatino function)
+### [2-10] Non-linearities (activation function)
 > <img width="190" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166887445-318949cb-63e2-4c5b-b421-657c4f09e20d.png">
 > 
 > > Allow a deep network to model arbitrary differentiable functions
