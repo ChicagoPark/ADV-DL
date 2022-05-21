@@ -727,7 +727,9 @@ Exploding gradients
 
 > An issue for recurrent networks, and networks that share parameters across layers
 (because we apply same operation over and over again)
-
+>
+> The sign of exploding gradients
+> > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/169633181-ce6040f2-8c89-4b7b-bba7-3e071dae8f2f.png">
 
 
 Vanishing gradients
