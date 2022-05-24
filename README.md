@@ -755,22 +755,56 @@ Vanishing gradients
 If any layer's magintude of gradient is smaller than the magintude of weight, then we can notice the vanishing gradient at that layer
 
 
-'Normalization'
+`Normalization`
 
 How to prevent vanishing (or exploding) gradients?
 
 inserting layers either before or after the Conv layers that scaled up(for vanishing grad) or scaled down(for exploding grad) the activation
 
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/169929179-3822e75a-2a7d-474e-996c-d058b6768561.png">
+
+
+`Batch Normalization`
+
+> Make activations zero mean and unit variance using entire batch of data
+
+> <img width="150" alt="IMG" src="https://user-images.githubusercontent.com/73331241/169929919-0c606a46-cc5b-4f21-9ca5-b8f8011118e7.png">
+
+How to do `Batch Normalization`: focus on the same channel of all batch
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/169930656-051a45c0-2834-4469-b413-8e9888dac604.png">
+
+> (1) Calculate `channel-wise` mean and standard deviation
+> 
+> > <img width="150" alt="IMG" src="https://user-images.githubusercontent.com/73331241/169930426-2b64bc0e-fc1f-420d-b88f-8c0192873aa6.png">
+>
+> (2) Normalize activations using the value from the above
+> 
+> > <img width="150" alt="IMG" src="https://user-images.githubusercontent.com/73331241/169930441-0b1d6891-d41d-48dc-a70b-eca64c0f692f.png">
 
 
 
 
+What does batch normalization do?
+* The good:
+  * Regularizes the network
+  * Handles badly scaled weights
+
+* The bad:
+  * Mixes gradient information between samples
+
+How to avoid Mixes gradient information?
+> `Use large batch sizes`. Because it would have `more stable` mean and standard deviation estimates.
 
 
+How to use batch normalization at `test time`?
+
+> Once we are done training, we can compute mean and standard deviation on training set using running average with all training set.
+
+> Most deep learning framework updates running mean and running standard deviation as we trained.
 
 ----
 
-# `Lec 5: 1:52:00 : 2022-05-20`
+# `Lec 5: 2:01:40 : 2022-05-24`
 
 --------
 
