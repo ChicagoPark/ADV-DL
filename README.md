@@ -153,10 +153,10 @@ option1 Thresholding: step function
 > > `In one-hot encoding, cross entropy and -log likelihood is exactly the same.`
 >
 > `[Issue]`
-> > * From the classification process, because of sigmoid and softmax functions attributes, we can get 0 from the activation function. Thus, once we put this value into log, there is no value is defined.
+> > * From the classification process, because of sigmoid and softmax functions attributes, we can get `0 from the activation function`. Thus, once we put this value into log, there is no value is defined.
 >
 > `[Solution]`
-> > * To solve it, modern deep learning package combine log and sigmoid or combine log and softmax
+> > * To solve it, modern deep learning package `combine` log and sigmoid or `combine` log and softmax
 > > 
 > > ```python
 > > # In PyTorch: log + sigmoid
