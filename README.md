@@ -1,5 +1,8 @@
+`Material Came from the University of Texas at Austin - Prof. Philipp Krähenbühl`
+
 # ADV-DL
 Advanced Deep Learning
+
 
 ## [0] Basic
 ### [0-1] Vector Operation
@@ -709,6 +712,9 @@ The above formula is almost same from the backpropagation as well. (just the pro
 > Reason of Input data normalization
 > > Depends on the input data, the training performance at the first layer
 
+> `How to do` Input data normalization
+> > Compute the mean and standard deviation value for entire `green channel`, `red channel`, and `blue channel`
+
 
 > Possible problem with inappropriate input
 > > Big scale of input: Big scale input can update hugely, but small scale will not affect that much. It would be followed by unstable training.
@@ -770,7 +776,7 @@ inserting layers either before or after the Conv layers that scaled up(for vanis
 
 > <img width="150" alt="IMG" src="https://user-images.githubusercontent.com/73331241/169929919-0c606a46-cc5b-4f21-9ca5-b8f8011118e7.png">
 
-How to do `Batch Normalization`: focus on the same channel of all batch
+How to do `Batch Normalization`: focus on the same channel of `all batch`
 > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/169930656-051a45c0-2834-4469-b413-8e9888dac604.png">
 
 > (1) Calculate `channel-wise` mean and standard deviation
@@ -780,8 +786,6 @@ How to do `Batch Normalization`: focus on the same channel of all batch
 > (2) Normalize activations using the value from the above
 > 
 > > <img width="150" alt="IMG" src="https://user-images.githubusercontent.com/73331241/169930441-0b1d6891-d41d-48dc-a70b-eca64c0f692f.png">
-
-
 
 
 What does batch normalization do?
@@ -801,6 +805,18 @@ How to use batch normalization at `test time`?
 > Once we are done training, we can compute mean and standard deviation on training set using running average with all training set.
 
 > Most deep learning framework updates running mean and running standard deviation as we trained.
+
+
+`Layer Normalization`
+> (1) Different from BN, it does `not use summary statistics` after training because it focuses on one image to normalize. 
+> 
+> (2) Works well for `sequence models`
+
+What LN does?
+> Make activations zero mean and unit variance without collecting statistics across batches
+
+
+
 
 ----
 
