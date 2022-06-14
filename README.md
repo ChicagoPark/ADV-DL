@@ -761,7 +761,7 @@ Vanishing gradients
 If any layer's magintude of gradient is smaller than the magintude of weight, then we can notice the vanishing gradient at that layer
 
 
-`Normalization`
+### [Make Better - `Normalization`]
 
 How to prevent vanishing (or exploding) gradients?
 
@@ -770,7 +770,7 @@ inserting layers either before or after the Conv layers that scaled up(for vanis
 > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/169929179-3822e75a-2a7d-474e-996c-d058b6768561.png">
 
 
-`Batch Normalization`
+#### [Normalization1 - `Batch Normalization`]
 
 > Make activations zero mean and unit variance using entire batch of data
 
@@ -807,7 +807,8 @@ How to use batch normalization at `test time`?
 > Most deep learning framework updates running mean and running standard deviation as we trained.
 
 
-`Layer Normalization`
+#### [Normalization2 - `Layer Normalization`]
+
 > (1) Different from BN, it does `not use summary statistics` after training because it focuses on one image to normalize. 
 > 
 > (2) Works well for `sequence models`
@@ -815,12 +816,21 @@ How to use batch normalization at `test time`?
 What LN does?
 > Make activations zero mean and unit variance without collecting statistics across batches
 
+> <img width="100" alt="IMG" src="https://user-images.githubusercontent.com/73331241/173475903-42f96351-a71c-4b60-bdde-3d6261212a58.png"><img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/173475909-3a1da3dd-f616-4af4-9755-8d5d66e38f61.png">
 
+#### [Normalization2 - `Instance Normalization`]
+> (1) Compute `same operation with BN`, but not thoughout the entire batch, just about the `individual image`.
+> 
+> (2) Works well for `graphics applications`, `Not used` much in `recognition` because of small sample size, we can have unstable statistics.
+>
+> Thus, we can use Instance Normalization in the matter less than recognition
 
+> <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/173476800-ae3f27ad-f5f9-441a-a2a6-211e95291842.png">
 
 ----
 
-# `Lec 5: 2:01:40 : 2022-05-24`
+
+# `Lec 5: 2:07:50 : 2022-06-14`
 
 --------
 
