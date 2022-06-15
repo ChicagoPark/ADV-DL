@@ -827,10 +827,39 @@ What LN does?
 
 > <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/173476800-ae3f27ad-f5f9-441a-a2a6-211e95291842.png">
 
+
+#### [Normalization2 - `Group Normalization`]
+> <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/173826286-32df1a30-0015-4dd0-8e1a-8f47c1ae0fd2.png">
+
+> Group Normalization = Instace Normalization + Layer Normalization
+>
+> [Property 1: `Better than Instance Normalization`]
+> > Since it has `more samples`, it can have `more stable statistics` than `Instance Norm`
+
+> [Property 2: `Better than Group Normalization`]
+> > Normalizing different groups of channel differently. It means `not all channels tied` as in `Layer Norm`
+
+
+#### [Normalization - Where do we need to add Normalization?]
+> <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/173827876-1b8d0016-b952-4921-908b-c31a5c66a6a4.png">
+
+
+* Option A: After Convolution
+
+* Option B: After ReLU (Non-Linearity)
+
+
+
+
+
+
+
+
+
 ----
 
 
-# `Lec 5: 2:07:50 : 2022-06-14`
+# `Lec 5: 2:16:05 : 2022-06-15`
 
 --------
 
