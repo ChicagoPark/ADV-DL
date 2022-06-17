@@ -138,7 +138,7 @@ option1 Thresholding: step function
 >
 > `difference` between L1 loss and L2 loss: when we predict wrong, L1 loss increases linearly, but L2 loss increases dramatically(Huge gradient, huge loss).
 > 
-> Additional information: in deep learning, it came out that L1 loss and L2 loss doesn't make a huge difference.
+> Additional information: in deep learning, it came out that L1 loss and L2 loss doesn't make a huge difference. (`We need to perceive that L2 loss is different from L2 norm.`)
 
 > #### (2) Loss - Classification
 > 
