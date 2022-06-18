@@ -877,6 +877,19 @@ What LN does?
 > [Problem of Conv layer only] If we don't use BN, we have to adjust all the weight parameter respectively. That is quite daunting and can delay the training.
 
 
+#### [BN - Coding mode]
+> We have to remember set the mode of the model (train or eval). Because we just compute the statistics from training process not the testing.
+
+```python
+net = ConvNet()
+net.train()
+print(net.training)
+# True
+
+net.eval()
+print(net.training)
+# False
+```
 
 
 
@@ -887,6 +900,7 @@ What LN does?
 # `Lec 5: 2:16:05 : 2022-06-15`
 
 --------
+?torch.nn.BachNorm2d
 
 ## [] PyTorch
 #### [ -1] Basic tensor
