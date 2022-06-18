@@ -891,8 +891,21 @@ print(net.training)
 # False
 ```
 
+### [Make Better - `Residual Connection`]
+> One of the most fundamental building block of modern DNN.
 
 
+Without normalization: Max reasonable trainable depth 10-12 consecutive layers
+
+With normalization: Max reasonable trainable depth 20-30 consecutive layers
+
+Parallel layer can be inserted inside of the consecutive layers, but in terms of consecutive layers, we need to keep that in mind.
+
+
+
+> <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/174417556-49241158-223e-495c-a7e5-0e3de9573629.png">
+
+> > Unsuitable out-of-the-capacity layer works poorer than lower-layer network.
 
 ----
 
