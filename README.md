@@ -907,6 +907,26 @@ Parallel layer can be inserted inside of the consecutive layers, but in terms of
 
 > > Unsuitable out-of-the-capacity layer works poorer than lower-layer network.
 
+
+Backward propagation is symmetric with forward propagation
+
+Through Residual connections, we can train networks of up to 1000 layers.
+
+Why do residual connection work? - Practical question and answer
+> (1) Backward: Gradient travels further without major modifications (vanishing)
+> 
+> (2) Forward: Reuse of patterns
+> > (2-1) Only update patterns
+> > (2-2) Dropping some layers does not even hurt performance
+> 
+> (3) Weights = 0
+> 
+> > Model -> Identity
+
+
+
+
+
 ----
 
 
