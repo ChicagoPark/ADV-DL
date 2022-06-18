@@ -844,12 +844,37 @@ What LN does?
 > <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/173827876-1b8d0016-b952-4921-908b-c31a5c66a6a4.png">
 
 
-* Option A: After Convolution
+#### [BN - * Option A: After Convolution] => `More popular`
 
-* Option B: After ReLU (Non-Linearity)
+> <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/174414647-3830bf8c-90da-44e0-81b5-1c16a9a80f03.png">
+
+> Since any bias, which is added from Conv Layer, will be subtracted from the BN process. Thus, we can set `bias = False`
+
+> `Possible problem`: Half of activations zeroed out in ReLU.
+> 
+> `Solution for zeroed out problem`: Learn a scale variable s and bias b after normalization
 
 
 
+#### [BN - * Option B: After ReLU (Non-Linearity)]
+> Benefit: Scale s and bias b is optional.
+
+> <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/174414750-1e1b502b-8a05-426e-8dc9-a3546cc7795a.png">
+
+
+#### [BN - Where `not to add` batch normalization]
+> We don't have to put Any type of BN `after fully connected layers`. Because output of fully-connected layer `does not have spatial dimension`.
+
+> Because of it, mean and startd deviation estimates too unstable.
+
+#### [BN - Why does normalization work]
+> `Key1`: Can handle badly scaled weights
+> 
+> `Key2`: We have just single parameter, which is scale parameter, to train per channel. 
+> 
+> > In order to increase the scale of certain channel, we have to implement it with updated scale parameter in channel.
+>
+> [Problem of Conv layer only] If we don't use BN, we have to adjust all the weight parameter respectively. That is quite daunting and can delay the training.
 
 
 
