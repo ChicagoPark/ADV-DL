@@ -852,14 +852,16 @@ What LN does?
 
 > `Possible problem`: Half of activations zeroed out in ReLU.
 > 
-> `Solution for zeroed out problem`: Learn a scale variable s and bias b after normalization
+> `Solution for zeroed out problem`: Learn a `scale variable s` and `bias b` after normalization
 
 
 
 #### [BN - * Option B: After ReLU (Non-Linearity)]
-> Benefit: Scale s and bias b is optional.
 
 > <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/174414750-1e1b502b-8a05-426e-8dc9-a3546cc7795a.png">
+
+> Benefit: Scale s and bias b is optional. (`Conv unchanged`)
+
 
 
 #### [BN - Where `not to add` batch normalization]
@@ -867,14 +869,11 @@ What LN does?
 
 > Because of it, mean and startd deviation estimates too unstable.
 
+
 #### [BN - Why does normalization work]
-> `Key1`: Can handle badly scaled weights
+> `Key1`: Can handle `badly scaled weights`
 > 
-> `Key2`: We have just single parameter, which is scale parameter, to train per channel. 
-> 
-> > In order to increase the scale of certain channel, we have to implement it with updated scale parameter in channel.
->
-> [Problem of Conv layer only] If we don't use BN, we have to adjust all the weight parameter respectively. That is quite daunting and can delay the training.
+> `Key2`: We have a scale parameter which can scale entire channel easily. It can replace lots of parameters for the same tasks.(Good for training efficiency)
 
 
 #### [BN - Coding mode]
@@ -891,40 +890,69 @@ print(net.training)
 # False
 ```
 
-### [Make Better - `Residual Connection`]
-> One of the most fundamental building block of modern DNN.
+### [Relation between the Deepness of network and Normalization]
 
+(1) `Without normalization`: Max reasonable trainable depth 10-12 consecutive layers
 
-Without normalization: Max reasonable trainable depth 10-12 consecutive layers
+(2) `With normalization`: Max reasonable trainable depth 20-30 consecutive layers
 
-With normalization: Max reasonable trainable depth 20-30 consecutive layers
-
-Parallel layer can be inserted inside of the consecutive layers, but in terms of consecutive layers, we need to keep that in mind.
-
-
+> Parallel layer can be inserted inside of the consecutive layers, but in terms of consecutive layers, we need to keep that in mind.
 
 > <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/174417556-49241158-223e-495c-a7e5-0e3de9573629.png">
 
 > > Unsuitable out-of-the-capacity layer works poorer than lower-layer network.
 
+### [Make Better - `Residual Connection`]
+> <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/174958930-418193bf-7f88-4ed3-b451-606a5ccef358.png">
 
-Backward propagation is symmetric with forward propagation
+(1) One of the most fundamental building block of modern DNN.
 
-Through Residual connections, we can train networks of up to 1000 layers.
+(2) Backward propagation is symmetric with forward propagation
 
-Why do residual connection work? - Practical question and answer
-> (1) Backward: Gradient travels further without major modifications (vanishing)
+(3) Through Residual connections, 1000 layers model also can be trained not that terribly.
+
+
+####  `Why do residual connection work? - Practical question and answer`
+
+(i) Backward: Gradient travels further `without major modifications (vanishing)`
+
+(ii) Forward: Reuse of patterns
+> (ii-1) Since patterns are reused. Thus, it only needs to capture what is changing and only needs to update activation map. It doesn't need to re-compute everything.
 > 
-> (2) Forward: Reuse of patterns
-> > (2-1) Only update patterns
-> > (2-2) Dropping some layers does not even hurt performance
+> (ii-2) Dropping some layers does not even hurt performance
 > 
-> (3) Weights = 0
-> 
-> > Model -> Identity
+> (ii-3) Even though some layer has `Weights = 0`, network would not be destroyed.
 
 
+####  `Thing to be careful in Residual Network Constuction`
 
+* `Possible Problem`: Identity x and the output of the network can have different size because of stride parameter or different output channel size.
+
+* `Solution`: Add `downsample` small network (Do `matching the number of channels` through n_intput, n_output arguements, and also do `matching shape` of it through stride argument.)
+
+```python
+class Block(torch.nn.Module):
+        def __init__(self, n_input, n_output, stride=1):
+            super().__init__()
+            self.net = torch.nn.Sequential(
+              torch.nn.Conv2d(n_input, n_output, kernel_size=3, padding=1, stride=stride, bias=False),
+              torch.nn.BatchNorm2d(n_output),
+              torch.nn.ReLU(),
+              torch.nn.Conv2d(n_output, n_output, kernel_size=3, padding=1, bias=False),
+              torch.nn.BatchNorm2d(n_output),
+              torch.nn.ReLU()
+            )
+            self.downsample = None
+            if stride != 1 or n_input != n_output:
+                self.downsample = torch.nn.Sequential(torch.nn.Conv2d(n_input, n_output, 1, stride=stride), # prevent different numbers of channels and shape
+                                                      torch.nn.BatchNorm2d(n_output))
+        
+        def forward(self, x):
+            identity = x
+            if self.downsample is not None:
+                identity = self.downsample(x)
+            return self.net(x) + identity
+```
 
 
 ----
