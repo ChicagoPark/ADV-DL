@@ -958,7 +958,7 @@ class Block(torch.nn.Module):
 ----
 
 
-# `Lec 5: 2:16:05 : 2022-06-15`
+# `Lec 5: 2:52:15 : 2022-06-22`
 
 --------
 ?torch.nn.BachNorm2d
