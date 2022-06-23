@@ -954,9 +954,76 @@ class Block(torch.nn.Module):
             return self.net(x) + identity
 ```
 
-
 ----
 
+## Optimization Algorithm
+
+### `Types of Optimization Algorithm`
+
+----
+* Key: For the `large` models and data, `SGD` with Momentum is better. For the `small` models and data: `Adam` is better.
+
+* Be careful: 
+----
+
+#### `[Types 1] Stochastic Gradient Descent with Momentum`
+
+----
+* Key: Works well in most cases
+
+* Be careful: Tuning learning rate is necessary
+----
+
+#### `[Types 2] RMSProp`
+
+> Slight modification of SGD
+
+----
+* Key: Working well on some RL problem
+
+* Be careful: We don't use it that much from Computer Vision and Image Processing
+----
+
+#### `[Types 3] ADAM`
+
+----
+* Key: 
+
+* Be careful: 
+----
+
+### `Hyper Paramter`
+
+Learning Rate  	                      |      Momentum    | Batch Size
+:---------------:                     | :-------------:  | :-------------:
+We should care the most regularly among Hyper Parameter  | We can use the default setting | Always try to use large size that GPU allows
+Use close to the largest LR that trains  | e.g.) SGD-rho = 0.9, ADAM-beta1 = 0.9, beta2 = 0.999 | 
+
+
+
+#### `[HP] Learning Rate - Learning Rate vs Batch Size`
+
+----
+* Key: Linear Scaling Rule: When the minibatch size is multiplied by k, multiply the learning rate by k.
+----
+
+#### `[HP] Learning Rate - Learning Rate and Training Result Relation`
+
+> Situation1: Val_loss is not going down or remain constant: Learning rate is too small
+
+> Situation2: Val_loss is going up or oscillate wildly: Learning rate is too big
+
+
+#### `[HP] Learning Rate Scheduling- PyTorch`
+
+----
+* Key: Using `torch.optim.lr_scheduler.ReduceLROnPlateau` allow us to tune Learning Rate automatically as soon as our model stop making progress.
+
+* Be careful: Put the proper criteria, corresponding to `lr_scheduler argument`, into `scheduler.step(np.mean(accuracies)`)
+----
+
+
+----
 
 # `Lec 5: 2:52:15 : 2022-06-22`
 
