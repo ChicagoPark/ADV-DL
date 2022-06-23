@@ -1025,7 +1025,7 @@ Use close to the largest LR that trains  | e.g.) SGD-rho = 0.9, ADAM-beta1 = 0.9
 
 ----
 
-# `Lec 5: 2:52:15 : 2022-06-22`
+# `Lec 5: 3:23:15 : 2022-06-23`
 
 --------
 ?torch.nn.BachNorm2d
