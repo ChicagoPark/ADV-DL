@@ -1022,10 +1022,98 @@ Use close to the largest LR that trains  | e.g.) SGD-rho = 0.9, ADAM-beta1 = 0.9
 * Be careful: Put the proper criteria, corresponding to `lr_scheduler argument`, into `scheduler.step(np.mean(accuracies)`)
 ----
 
+<!--
+
+I skipped Network distillation
+
+Lec: %.making_it_work
+
+from to 3:21 ~ 3:30
+
+## How do we train a small network?
+
+> Idea 1: Randomly intialize and train network.
+
+> Idea 2: Train a larger network and make it small.
+
+`Idea 2 will lead a better network`
+
+### `[] Network distillation`
+
+----
+* Key: Take
+
+* Be careful: 
+----
+
+#### `[] KEY WORD 1`
+
+>
+
+ELEMENT1  	      |      ELEMENT2
+:---------------: | :-------------:
+EXPLANATION1  | EXPLANATION2
+EXPLANATION3  | EXPLANATION4
+EXPLANATION5  | EXPLANATION6
+
+-->
+
+
+## Overfitting
+
+### `[Overfitting] Basic Understanding`
+
+----
+* Definition: Fit model to training set, and the model work poorly on unseen data (e.g. validation set)
+
+* Key: We can detect overfitting by plotting training and validation accuracy.
+
+* Reason of overfit: Our training dataset and actual real-life application(test) can have slightly different data distribution.
+
+* Be careful: Even though we have adequate data, if data distribution between training and test data are still different, we will have overfitting issue too.
+----
+
+### `[Overfitting] How to prevent overfitting`
+
+Many ways to prevent overfitting 
+:---------------:
+(1) Collect more data  
+(2) Make the model simpler through regluarization  
+(3) Transfer learning  
+
+
+Training considering overfitting
+:---------------:
+(1) Early stopping in practice 
+` `
+Don't have a stop button. Just save our model periodically. Then, we choose the model in person after considering train and validation graph. 
+
+
+
+
+### `[Overfitting] Data Augmentation`
+----
+* Key: `capture invariances` in data
+
+Type of Image Augmentations 
+:---------------:
+(1) Geometric augmentations
+(2) Color augmentations
+
+> <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/175846812-b2587aca-ba26-40b4-a407-b7ea5caf150e.png">
+
+* be careful: some augmentations require augmentation of labels (such as in segmentation, we have to crop the same location in label as well.)
+----
+
+Data augmentation in training
+:---------------:
+(1) (Randomly) augment every single iteration
+` `
+`Network never sees exact same data twice`
 
 ----
 
-# `Lec 5: 3:23:15 : 2022-06-23`
+# `Lec 5: 3:54:00 : 2022-06-27`
 
 --------
 ?torch.nn.BachNorm2d
