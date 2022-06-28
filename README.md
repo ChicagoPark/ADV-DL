@@ -1090,10 +1090,9 @@ Don't have a stop button. Just save our model periodically. Then, we choose the 
 
 
 
-
 ### `[Overfitting] Data Augmentation`
 ----
-* Key: `capture invariances` in data
+* Key: `capture invariances` in data. Always use data augmentation if possible.
 
 Type of Image Augmentations 
 :---------------:
@@ -1111,12 +1110,114 @@ Data augmentation in training
 ` `
 `Network never sees exact same data twice`
 
+
+### `[Overfitting] Overfitting in deep networks`
+
+----
+* Key: Exploit patterns from training data make some activation node bigger. However, that patterns can be invalid from val / test data.
+
+* Be careful: Deeper layers get the overfitting impact more since it relys on overfit activations from previous layers over and over again.
+
+
+----
+
+
+#### `[Prevent Overfitting] Dropout`
+
+* Key: Randomly remove some activation nodes.
+
+* Be careful: Do not use dropout before general convolutions.
+
+Dropout during Training  	      |      Dropout during Evaluation
+:---------------: | :-------------:
+With probability `a` set activation a_l(i) to `zero`  | Use all activations, but scale by multiplying  `1/(1-a)`
+
+> <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/176069901-24d77714-c9a4-4534-8444-111311d0259d.png">
+
+
+Where to add dropout   	      
+:---------------: 
+Before any large fully connected layer
+Before some 1X1 convolutions
+`Not before general convolutions`
+
+
+Smaller model
+
+Pro  	      |      Con
+:---------------: | :-------------:
+Overfits less  | Worse generalization
+
+
+Big model with regularization
+
+Using `Weight decay`: Not only optimize our loss, but also add weight term in optimization process to maintain weight small.
+
+> Optimizer charges of `Weight decay` (Parameter call `weight_decay` inside of the torch.optim.SGD or torch.optim.Adam)
+
+Advice: Use the default value of `weight_decay`.
+
+Weight Decay Pro                  |     Weight Decay  Con
+:---------------:                 | :-------------:
+Keep weights small                | Worse generalization
+Helps handle exploding gradients  |   
+
+
+Ensembles
+Key: Train multiple models and use average predictions of multiple models
+
+Can consider different random initializations / data augmentation
+
+> <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/176078701-69b54c40-6cb8-45f9-a3e7-16b8f27c5b16.png">
+
+Why do ensembles work?
+
+Ensemble Pros                  |     Ensemble Cons
+:---------------:                 | :-------------:
+Fewer parameters                | Longer training
+Each model overfits in its own way  |   ` `
+Boost 1-3 % accuracy on most tasks  |   ` `
+
+When to use ensembles?
+
+* If you have the compute power
+
+* If you really need the last bit of accuracy
+
+Argumentation Code in PyTorch
+
+```python
+if __name__ == "__main__":
+    import torch
+    # Parse all input arguments
+    from argparse import ArgumentParser
+    parser = ArgumentParser()
+    parser.add_argument('logdir')
+    parser.add_arguement('-n', '--n_epochs', type=int, default=10)
+    parser.add_arguement('-o', '--optimizer', default='optim.Adam(parameter)')
+    parser.add_arguement('-b', '--batch_size', type=int, default=128)
+    parser.add_arguement('--no_normalization', action='store_true')
+    args = parser.parse_args()
+    
+    ...
+    
+    # Parse the optimizer
+    optimizer = eval(args.optimizer, {'parameters': net.parameters(), 'optim': torch.optim})
+    
+    # Train
+    train(net, args.logdir, device=device, resize(128, 128), n_epochs=args.n_epochs, optimizer=optimizer)
+    
+
+```
+
 ----
 
 # `Lec 5: 3:54:00 : 2022-06-27`
 
 --------
 ?torch.nn.BachNorm2d
+
+<!--
 
 ## [] PyTorch
 #### [ -1] Basic tensor
@@ -1347,4 +1448,6 @@ net = ConvNet()
 
 <!--
 Course Information: http://www.philkr.net/cs342/
+-->
+
 -->
