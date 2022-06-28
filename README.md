@@ -1206,13 +1206,11 @@ if __name__ == "__main__":
     
     # Train
     train(net, args.logdir, device=device, resize(128, 128), n_epochs=args.n_epochs, optimizer=optimizer)
-    
-
 ```
 
-## Training on small datasets
+## Practical Guide in deep learning
 
-### `[] How to trainon small datasets`
+### `[Practical] How to training small datasets`
 
 ----
 
@@ -1222,32 +1220,50 @@ if __name__ == "__main__":
 + Key: Use transfer learning whenever possible if large pre-trained model exists.
 ```
 
-### `[] Generalization in deep learning`
+### `[Practical] Generalization in deep learning`
 
 ```diff
 - Wrong intuition: Bigger/wider models overfit more.
 
 + Key: Bigger model can generalize better than small one. Hence overfit less.
 
-@@ Tip: Models overfitting is dependent on learning algorithms. SGD and daga augmentation is positive for overfitting, @@
-@@ but Adam makes overfitting worse. @@
+@@ Tip: (1) Models overfitting is dependent on learning algorithms. @@
+@@ Therefore, SGD and data augmentation is robust for overfitting. However, Adam makes overfitting worse. @@
 
 - Be careful: Measuring overfitting is still wide opened problem.
-
 ```
 
 > <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/176103088-784eca7f-b988-4950-9c87-ee0bda8e2d8a.png"><img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/176103255-30542d5b-a4e2-4cf4-b202-5ca24aa5610f.png">
 
 
-Learning rate
-Architecture
-Initialization
-Normalization
-Data augmentation
-Loss function
+### `[Practical] Graduate Student Descent`
+
+> <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/176121668-9b312b17-1fce-4505-9fe6-f268a4135cee.png">
+
+```diff
++ Possible manual modification 1: Learning rate
++ Possible manual modification 2: Architecture
++ Possible manual modification 3: Initialization
++ Possible manual modification 4: Normalization
++ Possible manual modification 5: Data augmentation
++ Possible manual modification 6: Loss function
+
+- Vanishing or Exploding gradient(can notice through plotted loss function): Fix initialization and learning rate
+
+- Slow training: Add normalization or Use residual connections.
+
+- Overfitting: Add data augmentation or Early stopping or Try a pre-trained network or Collect more data
+
+@@ If network fits training and validation data well, evaluate on test set.  @@
+
+- If test set performance is poor: Include test into validation set and then collect new test set
+
+```
 
 
-Include test into validation set and then collect new test set
+
+
+
 
 ----
 
