@@ -1210,6 +1210,45 @@ if __name__ == "__main__":
 
 ```
 
+## Training on small datasets
+
+### `[] How to trainon small datasets`
+
+----
+
+```diff
++ Solution: Utilize pre-trained model and do fine-tuning
+
++ Key: Use transfer learning whenever possible if large pre-trained model exists.
+```
+
+### `[] Generalization in deep learning`
+
+```diff
+- Wrong intuition: Bigger/wider models overfit more.
+
++ Key: Bigger model can generalize better than small one. Hence overfit less.
+
+@@ Tip: Models overfitting is dependent on learning algorithms. SGD and daga augmentation is positive for overfitting, @@
+@@ but Adam makes overfitting worse. @@
+
+- Be careful: Measuring overfitting is still wide opened problem.
+
+```
+
+> <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/176103088-784eca7f-b988-4950-9c87-ee0bda8e2d8a.png"><img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/176103255-30542d5b-a4e2-4cf4-b202-5ca24aa5610f.png">
+
+
+Learning rate
+Architecture
+Initialization
+Normalization
+Data augmentation
+Loss function
+
+
+Include test into validation set and then collect new test set
+
 ----
 
 # `Lec 5: 3:54:00 : 2022-06-27`
