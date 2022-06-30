@@ -147,18 +147,20 @@ Advanced Deep Learning
 
 -->
 
-### `Loss`
+### `[NN] Loss`
 
 > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166390923-c1c541ce-8c65-4c3b-a8f8-8b18b289ecee.png">
 
 #### `[Loss] Loss in Regression`
 
 ----
+
+L1 Loss function  	      |      L2 Loss function
+:---------------: | :-------------:
+Least Absolute Deviations.  | Least Square Errors
+
+
 ```diff
-+ L1 Loss function: L1 Loss stands for Least Absolute Deviations.
-
-+ L2 Loss function: L2 Loss stands for Least Square Errors
-
 ! Difference L1 vs L2: They handle outliers differently. L2 is much more sensitive to outliers because the differences are squared, whilst L1 is the absolute difference and is therefore not as sensitive
 ```
 
@@ -170,98 +172,110 @@ Advanced Deep Learning
 
 ----
 
-
 <!--
 > Additional information: in deep learning, it came out that L1 loss and L2 loss doesn't make a huge difference. (`We need to perceive that L2 loss is different from L2 norm.`)
 -->
 
 #### `[Loss] Loss in Classification`
  
-> > (i) -Log likelihood
-> > - log(p(y))
-> 
-> > y: ground truth label
-> > 
-> > p = activation function's output (e.g. softmax(o))
-> > 
-> > p(y): take the probability of the ground truth label through our output activation function
->
-> > (ii) Cross entropy: sum over all labels y
-> > 
-> > `In one-hot encoding, cross entropy and -log likelihood is exactly the same.`
->
+----
+ 
+ Negative Log-likelihood  	      |      Cross-Entropy Loss
+:---------------: | :-------------:
+A loss function that represents how much the predicted probabilities deviate from the true ones. It is used in binary cases.  | A generalized form of the log loss, which is used for multi-class classification problems.
+
+```diff
+! Same situation: In one-hot encoding, cross entropy and -log likelihood is exactly the same.
+```
+
+* PyTorch - Negative Log-likelihood: BCEWithLogitsLoss (log + sigmoid)
+* PyTorch - Cross-Entropy: CrossEntropyLoss (log + softmax)
+----
+
+<!--
+
 > `[Issue]`
 > > * From the classification process, because of sigmoid and softmax functions attributes, we can get `0 from the activation function`. Thus, once we put this value into log, there is no value is defined.
 >
 > `[Solution]`
 > > * To solve it, modern deep learning package `combine` log and sigmoid or `combine` log and softmax
-> > 
-> > ```python
-> > # In PyTorch: log + sigmoid
-> > BCEWithLogitsLoss
-> > ```
-> > 
-> > ```python
-> > # In PyTorch: log + softmax
-> > CrossEntropyLoss
-> > ```
 
-### [2-5] Gradient Descent
+-->
+
+
+
+### `[NN] Gradient Descent`
 
 #### [GD-Stochastic Gradient Descent]
 
 <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166613395-fad93739-6997-4582-9baf-0e0b625ca367.png">
 
-`highly oscillate and has large variance.`
+----
 
-> Compute the gradient as we move, so always we take a step and compute the gradient and take a step ...
+```diff
++ Attribute: highly oscillate and has large variance.
+! Same situation: In one-hot encoding, cross entropy and -log likelihood is exactly the same.
+```
+Why SGD works etter than Standard Gradient Descent in `non-convex function`
+:---------------: 
+Reason1: oscillation of SGD helps to explore the function  
+Reason2: faster. We don't have to wait to loop over entire training set to compute gradient  
 
-> SGD can `work better` than standard gradient descent in `non convex function`.
-> 
-> reason1: oscillation of SGD helps to explore the function
-> 
-> reason2: faster. We don't have to wait to loop over entire training set to compute gradient
+<!--
+> Compute the gradient as we move, so always we take a step and compute the gradient and take a step ..
+-->
 
+----
 
-
-> #### (1) Variance of SGD
+#### [SGD] Variance of SGD
 > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166393020-04314dc3-0935-4eef-a871-80c87f9402b2.png">
-> 
-> measure the agreement between different data samples about gradient, we can compute the variance of gradient estimates.
-> 
-> difference between one single data point and the gradient of entire objects' loss
-> 
-> Reason of introduction(biggest issue): `not` all training set give a `good direction` to update
 
-### [2-6] Mini-batches
+* Measure the agreement between different data samples about gradient, we can compute the variance of gradient estimates.
+
+* difference between the gradient of one single data point and the gradient of entire objects' loss
+ 
+`Reason of introduction(biggest issue): "not" all training set give a "good direction" to update`
+
+### [NN] Mini-batches
+
+> Not just get one data element(x, y), it `takes bunch`(so-called batch or mini-batch) of data elements.
+
+----
+```diff
++ Key: Mini-batches can estimate thr gradient robustly by `reducing the variance` of SGD.
+
+! Param Update: we compute the `average gradient` over the mini-batch and `update the parameters` rather than considering single data element.
+
+- Be careful: We should use MB as much as we can. Set the batch size as big as possible GPU can.
+```
+----
+<!--
+
 > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166613762-e105009e-af17-4cec-8dd0-31a8909ed68c.png">
-> 
-> Way to `reduce the variance` of SGD. Thus we should use mini-batch as much as we can.
-> 
-> ##### `What Mini-batches do?`
-> * Not just get one data element(x, y), it `takes bunch`(so-called batch or mini-batch) of data elements.
->
-> ##### `How mini-batches update parameters?`
-> * for each mini-batch, we compute the `average gradient` over the mini-batch and `update the parameters` instead of updating with single data element.
-> 
-> ##### `What is the benefits of mini-batches?`
-> * Estimate the gradient robustly, reduce the variance of SGD massively
->
+
 > ##### `Difference in variance`
 > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166613961-a3ecc639-17b5-44ee-9f4c-ad83b8181703.png">
 
-### [2-7] Momentum
-> <img width="190" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166614563-f4a678d3-7cc3-4534-937c-d713c02809c9.png">
-> 
-> Momentum(v) is that `functionalized gradient` by adding previous Momentum(v). It helps to take into account the past. Rho is the parameter for past considering.
-> 
-> Additional Benefit of Momentum
-> 
-> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166614982-b3a36031-062b-4487-bbae-9e821a27481e.png">
-> 
-> Variance reduction of Momentum (since update term(`blue`) is getting smaller.)
+-->
 
-* Use mini-batched and Momentum every time.
+### [NN] Momentum
+
+----
+```diff
++ Key: Momentum(v) is that `functionalized gradient` by adding previous Momentum(v).
+
++ Benefit 1: consider past training situation
++ Benefit 2: Variance reduction of Momentum (since update term(`blue`) is getting smaller.)
+
+- Be careful: Use mini-batched and Momentum every time as default.
+```
+----
+
+> <img width="190" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166614563-f4a678d3-7cc3-4534-937c-d713c02809c9.png">
+
+> <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166614982-b3a36031-062b-4487-bbae-9e821a27481e.png">
+
+<!--
 
 ### [2-8] Training code
 
@@ -302,23 +316,28 @@ When we use Fully connected model which only has linear layer, it can be overfit
     
     # TODO: Log validation accuracy
 ```
+-->
 
-### [2-9] Layers
-> ##### `What is a layer?`
-> 
-> > Largest computational unit that remains unchanged throughout different architectures
-> 
-> ##### `Layer naming`
+### [NN] Layers
+
+> Largest computational unit that remains unchanged throughout different architectures
+
+----
+```diff
++ How to count layer: Count from the first hidden layer to the output layer. (Below example: 4 layers)
+
+- Be careful: Normal output of activation function: `activation` / Activation function goes in to output layer: `feature`
+```
+
 > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166881431-3d53270c-10d2-45f3-9396-114fe5c1b6b3.png">
-> 
-> > The number of layer: 4
-> > 
-> > Normal output of activation function: `activation`
-> > 
-> > The output of activation function goes in to output layer: `feature`
+
+----
 
 
-### [2-10] Non-linearities (activation function)
+
+
+
+### [NN] Non-linearities (activation function)
 > <img width="190" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166887445-318949cb-63e2-4c5b-b421-657c4f09e20d.png">
 > 
 > > Allow a deep network to model arbitrary differentiable functions
