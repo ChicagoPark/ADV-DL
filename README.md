@@ -338,8 +338,7 @@ When we use Fully connected model which only has linear layer, it can be overfit
 
 
 ### [NN] Non-linearities (activation function)
-> <img width="190" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166887445-318949cb-63e2-4c5b-b421-657c4f09e20d.png">
-> 
+
 > > Allow a deep network to model arbitrary differentiable functions
 > 
 > ##### `Zoo of activation functions`
