@@ -49,48 +49,56 @@ Advanced Deep Learning
 > (3) t second of audio: T X M tensor
 
 
-## [1] Regression and classification
+## `Regression and Classification`
 
-### [1-1] Difference between linear regression and classificaiton
+### `Difference between linear regression and classificaiton`
 
-> * Regression predicts real value(smooth range)
-> 
-> * Classification predicts integer/class(specific kinds)
+----
+```diff
++ Key of Regression: Regression predicts real value(smooth range)
++ Key of Classification: Classification predicts integer/class(specific kinds)
 
-## [1-2] Linear regression / logistic regression / multi-class classification
+- Be careful: 
+```
+----
+
+### `Linear regression / logistic regression / multi-class classification`
 
 > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/160286720-7b4eea2c-58b2-4c82-a052-bfc3b5bb06c3.jpg">
 
 > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/160286721-33e26992-3334-492c-b604-c7b21cd170d1.jpg">
 
-## [1-3] Backpropagation
-> * [1] Purpose: to update the parameters with the optimal values by analyzing and differentiating the loss function
->  
-> * [2] Benefit: Different from numerical differentiation, Backpropagation `saves the differentiation result matrix` from the the highest layer, then goes down `with saved matrix`. Thus, it is beneficial when it comes to memory utility and the amount of operation.
+
+
+## `Backpropagation`
+
+----
+```diff
++ Purpose: to update the parameters with the optimal values by analyzing and differentiating the loss function.
+
++ Benefits 1: Different from numerical differentiation, backpropagation saves the differentiation result matrix` from the the highest layer.
++ Benefits 2: Then goes down `with saved matrix`. Thus, it is robust in memory utility and the amount of operation.
+```
 
 > <img width="950" alt="IMG" src="https://user-images.githubusercontent.com/73331241/160856967-d7de2f36-f8bb-491b-b9f3-4b3c76186494.jpeg">
 
+----
 
-## [2] Neural Network Modeling
+## `Neural Network Modeling`
 
-```python
-# Type the below to figure out what is necessary arguments
-?torch.nn.Linear
-?torch.nn.Conv2d
-?torch.nn.MaxPool2d
+### `[NN] Classifier`
+
+----
+```diff
++ Non-linearities: ReLU(x) = max(x,0)
+
+- Problem of linear classifier: we cannot solve the problem which `requires curve` to classify two groups
+
+- Do layer-ed linear layers help?: No. That is just combination of linear layers still linear.
 ```
+----
 
-### [2-1] Classifier
-
-> #### (1) The `limitation of linear classifier`: we cannot solve the problem which `requires curve` to classify two groups
-> 
-> * #### Does adding more linear layers help?
->      > No. Combination of linear layers still linear.
-
-> #### (2) Non-linearities: ReLU(x) = max(x,0)
-> 
-> Non-linear and differentiable almost everywhere
-
+<!--
 
 ### [2-2] Positive regression
 
@@ -102,39 +110,62 @@ Advanced Deep Learning
 > > option2(Soft ReLU)
 > > > if we `want to train` a network with positive prediction, we should always use softrelu(softplus) function
 
+-->
 
-### [2-3] Binary Classification
+#### `[Classifier] Binary Classification`
 
-option1 Thresholding: step function
+----
+```diff
+- Option 1: Step function
 
-> hard to train because output activation function shape is `step function`. Thus, the derivative in everywhere is 0.
+! Prob. of Step: Impossible to train because output activation function shape. Thus, the derivative in everywhere is 0.
 
-`option1 Logistic Regression`: sigmoid
++ Option 2: Sigmoid
 
+! Prob. of Sigmoid: Differentiable, but it has a zero gradient in big range.
+```
+----
 
-### [2-3] General Classification
+#### `[Classifier] General Classification`
 
-> option1: argmax
-> 
->  > hard to train because we `cannot compute` gradient of argmax function.
+----
+```diff
+- Option 1: argmax
 
-> `option2: softmax`
-> 
->  > optimize it using `cross entropy`
+! Prob. of argmax: hard to train because we `cannot compute` gradient of argmax function.
 
++ Option 2: softmax (Possible to train and actively used in multi-classification)
+```
+----
+
+<!--
 > `Tip in output representations`
 > 
 >  > `do not` `add` other `output transformation` into model's output. Always output raw values
 >  > 
 >  > reason: many output transformation makes `harder to differentiate`. If bigger output transformation, numericably unstable.
 
-### [2-4] Loss
+-->
+
+### `Loss`
 
 > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166390923-c1c541ce-8c65-4c3b-a8f8-8b18b289ecee.png">
 
-> #### (1) Loss - Regression
-> 
-> > <img width="190" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166210192-74bdc977-674a-4549-aedf-33fd3c9ae40d.png">
+#### `[Loss] Loss in Regression`
+
+----
+```diff
++ L1 Loss function: L1 Loss stands for Least Absolute Deviations.
+
++ L2 Loss function: L2 Loss stands for Least Square Errors
+
+- Be careful: 
+```
+----
+
+
+
+> <img width="190" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166210192-74bdc977-674a-4549-aedf-33fd3c9ae40d.png">
 >
 > `difference` between L1 loss and L2 loss: when we predict wrong, L1 loss increases linearly, but L2 loss increases dramatically(Huge gradient, huge loss).
 > 
