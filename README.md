@@ -159,20 +159,24 @@ Advanced Deep Learning
 
 + L2 Loss function: L2 Loss stands for Least Square Errors
 
-- Be careful: 
+! Difference L1 vs L2: They handle outliers differently. L2 is much more sensitive to outliers because the differences are squared, whilst L1 is the absolute difference and is therefore not as sensitive
 ```
+
+* `L1 vs L2 loss, which is better?`
+
+  * The choice between L1 and L2 comes down to `how much you want to punish outliers` in your predictions. If minimising large outliers is important for your model then L2 is best as this will highlight them more due to the squaring, however if occasional `large outliers are not an issue` then L1 may be best.
+
+> <img width="190" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166210192-74bdc977-674a-4549-aedf-33fd3c9ae40d.png">
+
 ----
 
 
-
-> <img width="190" alt="IMG" src="https://user-images.githubusercontent.com/73331241/166210192-74bdc977-674a-4549-aedf-33fd3c9ae40d.png">
->
-> `difference` between L1 loss and L2 loss: when we predict wrong, L1 loss increases linearly, but L2 loss increases dramatically(Huge gradient, huge loss).
-> 
+<!--
 > Additional information: in deep learning, it came out that L1 loss and L2 loss doesn't make a huge difference. (`We need to perceive that L2 loss is different from L2 norm.`)
+-->
 
-> #### (2) Loss - Classification
-> 
+#### `[Loss] Loss in Classification`
+ 
 > > (i) -Log likelihood
 > > - log(p(y))
 > 
