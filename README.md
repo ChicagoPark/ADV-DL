@@ -1454,11 +1454,77 @@ Key concept of LSTMs
 
 
 Limitations of Recurrent Models
+(1) Slow to train. (We cannot use parallelization because of sequence dependency)
+(2) Long sequences lead to vanishing / exploding gradients
+
+
+Trainsformer
+
+> There is no concept of time step for the input. Put the sentence (e.g. The red dog) simultaneously.
+
+![20220703_134524](https://user-images.githubusercontent.com/73331241/177025047-8283d57e-78e1-4a57-942d-aa783cb99a1d.png)
+
+[Transformer Components]
+Embedding Space: Similar words or words with similar meaning have physically close location with each other.
+(We can use pre-trained Embedding Space)
+
+Attention: What part of the input should we focus?
+
+
+(First step) Input Embedding: Put the word as an input into the Embedding Space, we can get corresponding vector.
+
+Positional Encoders: Vector that gives context based on potition of word in sentence.
+(The meaning of word can be different according to the position in sentence.)
+
+![20220703_135002](https://user-images.githubusercontent.com/73331241/177025200-0d2a04d5-526b-448f-a4af-7fbce3999f72.png)
+
+
+Encoder Block
+
+![20220703_135301](https://user-images.githubusercontent.com/73331241/177025278-390c9298-3162-426d-941c-5fa67ed71f69.png)
+
+(Second step) Multi-Head Attention layer
+> Get the attention vectors
+
+![20220703_135208](https://user-images.githubusercontent.com/73331241/177025255-fdc5dadd-6556-4e30-99a2-d9f49c44d50a.png)
+
+(Second step) Feed Forward layer
+> Feed Forward layer is applyed to every attention vectors
+
+> In practice, to transform attention vector into the form of digestable form to used in encoder block or decoder block.
+
+![20220703_135744](https://user-images.githubusercontent.com/73331241/177025408-87b9f885-40bf-4623-bd0b-9847cd9b0d7b.png)
+
+Decoder
+
+
+<!--
+Limitations of Recurrent Models
 
 (1) Encoding bottleneck (We can lose information from encoding process)
-(2) Slow, no parallelization
+(2) Slow to train (no parallelization)
 (3) Not long memory
 
+
+### Transformer
+
+Intuition Behind Self-Attention: Attending to the most important parts of an input.
+
+1. Identify which parts to attend to. (Similar to a search problem!)
+2. Extract the features with high attention
+
+
+Understanding Attention with Search through YouTube Example
+[1] Compute attention mask: How similar is each key to the desired query?
+
+![20220703_132120](https://user-images.githubusercontent.com/73331241/177024445-5ed31ce2-055c-446c-b644-e3e3f6c181b0.png)
+
+[2] Extract values based on attention: Return the values hightest attention
+
+
+Understanding Attention with Search through YouTube Example
+
+-->
 
 ----
 
