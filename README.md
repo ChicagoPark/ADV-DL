@@ -78,6 +78,10 @@ Advanced Deep Learning
 
 + Benefits 1: Different from numerical differentiation, backpropagation saves the differentiation result matrix` from the the highest layer.
 + Benefits 2: Then goes down `with saved matrix`. Thus, it is robust in memory utility and the amount of operation.
+
+! Simple Algorithm 1: Take the derivative (gradient) of the loss with respect to each parameter
+! Simple Algorithm 2: Shift parameters in order to minimize loss
+
 ```
 
 > <img width="950" alt="IMG" src="https://user-images.githubusercontent.com/73331241/160856967-d7de2f36-f8bb-491b-b9f3-4b3c76186494.jpeg">
@@ -1314,9 +1318,91 @@ if __name__ == "__main__":
 ```
 
 
+## Recurrent Neural Network
+
+### `[] SMALL TOPIC 1`
+
+----
+```diff
++ Key: RNN maintains its internal state h(t) - which is updated at each step.
+
+- Be careful: 
+```
+----
+
+
+* Sequence Modeling Applications
+
+> <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/177021067-d6fc81ae-b3b4-48f3-a44e-ba773d704630.png">
+
+* Neurons with Recurrence
+
+h_t: maintain internal memory or state of prior tasks and pass it to forward.
+
+The output of the node consider the `input` and `past memory`
+
+> <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/177021232-b6e0dbec-9534-4ff7-9bfe-673e391b8387.png">
+
+
+* State variable h_t
+> h_t is updated at each time step as a sequence is processed.
+
+* * Note: the same function and set of parameters are used at every time step.
+
+> <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/177021388-6e5fe846-16c1-4de6-b276-77835794d390.png">
+
+Key: set of weight w is the same across all time steps that are being considered in the sequence. Functions that compute the hidden state is also the same.
+
+
+* Dive in to the internal state computation
+
+> <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/177021541-7558918a-0e96-4ebb-b135-e4182f7409b4.png">
+
+### RNN Graph
+
+![20220703_110354](https://user-images.githubusercontent.com/73331241/177021555-02eca7f0-75c1-495a-bc66-c73cbdf3d1af.png)
+
+![20220703_110626](https://user-images.githubusercontent.com/73331241/177021611-fe2b9df1-8602-493d-a357-1ac0dc01e6d9.png)
+
+Key: Re-use the same weight matrices at every time step
 
 
 
+RNN Intutition
+
+Task: predict the next word that's going to come at the end of the sentence.
+
+> <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/177021456-b6d8f601-e76a-49d3-b009-bbf0cde6da33.png">
+
+RNN Tensorflow model from Scratch
+
+![20220703_111315](https://user-images.githubusercontent.com/73331241/177021781-39effac4-1ac0-4cf7-9f40-078d8e25efe0.png)
+
+=> tf.keras.layers.SimpleRNN(run_units) 
+
+Various RNN models
+
+![20220703_111511](https://user-images.githubusercontent.com/73331241/177021837-d9007556-a91c-4f5a-bd85-efe73fbf09a9.png)
+
+
+Sequence Modeling: Design Criteria
+
+To model sequence, we need to:
+ 1. Handle `variable-length` sequences (able to short or long sentence)
+ 2. Track `long-term` dependencies
+ 3. Maintain information about order
+ 4. Share parameters across the sequence to keep track of the dependency
+
+
+Encoding Language for a Neural Network
+
+Point: Neural networks cannot interpret words, so they require numerical inputs
+
+![20220703_112934](https://user-images.githubusercontent.com/73331241/177022135-dceaa549-5b85-4cc6-9585-e140844a4783.png)
+
+
+Train RNN
+Backpropagation Through Time
 
 ----
 
