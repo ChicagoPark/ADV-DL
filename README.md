@@ -824,6 +824,8 @@ How to prevent vanishing (or exploding) gradients?
 
 inserting layers either before or after the Conv layers that scaled up(for vanishing grad) or scaled down(for exploding grad) the activation
 
+[Additional handler: 1. Activation function, 2. Weight initialization, 3. Network architecture]
+
 > <img width="350" alt="IMG" src="https://user-images.githubusercontent.com/73331241/169929179-3822e75a-2a7d-474e-996c-d058b6768561.png">
 
 
@@ -1403,6 +1405,60 @@ Point: Neural networks cannot interpret words, so they require numerical inputs
 
 Train RNN
 Backpropagation Through Time
+
+![20220703_113610](https://user-images.githubusercontent.com/73331241/177022257-4e7d92e8-bf49-4305-a203-ec4ea49ae305.png)
+
+
+Vanishing gradient
+> Vanishing gradients problem can be more crucial in longer sentences.
+
+How to overcome it
+
+Trick #1: Activation Functions
+
+![20220703_114431](https://user-images.githubusercontent.com/73331241/177022443-560aa324-309a-4a20-8d2d-06f476be0615.png)
+
+Trick #2: Parameter Initialization
+
+> Initialize weights to identity matrix and biases to zero
+
+Trick #3: Gated Cells
+
+
+* Most robust solution
+
+Idea: use gates to `selectively` add or remove information within each recurrent unit with
+
+Gates optionally let information through the cell
+
+![20220703_114658](https://user-images.githubusercontent.com/73331241/177022483-8e9a2638-b418-45c6-8a66-aae80403fffb.png)
+
+> Long Short Term Memory (LSTMs) networks rely on a gated cell to track information throughout many time steps.
+
+
+Long Short Term Memory (LSTMs)
+
+![20220703_114933](https://user-images.githubusercontent.com/73331241/177022534-394e18e4-6878-43fe-8bab-f5c93e020db1.png)
+
+Key concept of LSTMs
+
+(1) Maintain a `cell state`
+
+(2) Use `gates` to control the `flow of information`
+  (i) `Forget` gate gets rid of irrelevant information
+  (ii) `Store` relevant information from current input
+  (iii) Selectively `update` cell state
+  (iv) `Output` gate returns a filtered version of the cell state
+  
+(3) Backpropagation through time with partially `uninterrupted gradient flow`.
+
+
+Limitations of Recurrent Models
+
+(1) Encoding bottleneck (We can lose information from encoding process)
+(2) Slow, no parallelization
+(3) Not long memory
+
 
 ----
 
