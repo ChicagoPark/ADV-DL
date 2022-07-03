@@ -1322,7 +1322,7 @@ if __name__ == "__main__":
 
 ## Recurrent Neural Network
 
-### `[] SMALL TOPIC 1`
+### `[RNN] Inside of the Recurrent Neural Network`
 
 ----
 ```diff
@@ -1333,132 +1333,135 @@ if __name__ == "__main__":
 ----
 
 
-* Sequence Modeling Applications
+#### [RNN] Intuition - Sequence Modeling Applications
 
-> <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/177021067-d6fc81ae-b3b4-48f3-a44e-ba773d704630.png">
-
-* Neurons with Recurrence
-
-h_t: maintain internal memory or state of prior tasks and pass it to forward.
-
-The output of the node consider the `input` and `past memory`
-
-> <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/177021232-b6e0dbec-9534-4ff7-9bfe-673e391b8387.png">
+> <img width="500" alt="IMG" src="https://user-images.githubusercontent.com/73331241/177021067-d6fc81ae-b3b4-48f3-a44e-ba773d704630.png"><img width="500" alt="IMG" src="https://user-images.githubusercontent.com/73331241/177021837-d9007556-a91c-4f5a-bd85-efe73fbf09a9.png">
 
 
-* State variable h_t
-> h_t is updated at each time step as a sequence is processed.
+#### `[RNN] Neurons with Recurrence`
 
-* * Note: the same function and set of parameters are used at every time step.
+> <img width="400" alt="IMG" src="https://user-images.githubusercontent.com/73331241/177021232-b6e0dbec-9534-4ff7-9bfe-673e391b8387.png">
+
+----
+```diff
++ h_t: maintain internal memory or state of prior tasks and pass it to forward.
+
+! Training process 1: h_t is updated at each time step as a sequence is processed.
+
+! Training process 2: the same weight function w is the same across all time steps.
+
++ Key: The output of the node consider the `input` and `past memory`
+
+- Be careful: 
+```
+
+##### `RNN internal state computation`
 
 > <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/177021388-6e5fe846-16c1-4de6-b276-77835794d390.png">
 
-Key: set of weight w is the same across all time steps that are being considered in the sequence. Functions that compute the hidden state is also the same.
-
-
-* Dive in to the internal state computation
-
 > <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/177021541-7558918a-0e96-4ebb-b135-e4182f7409b4.png">
 
-### RNN Graph
+----
 
-![20220703_110354](https://user-images.githubusercontent.com/73331241/177021555-02eca7f0-75c1-495a-bc66-c73cbdf3d1af.png)
+#### `[RNN] Code Intutition`
 
-![20220703_110626](https://user-images.githubusercontent.com/73331241/177021611-fe2b9df1-8602-493d-a357-1ac0dc01e6d9.png)
+`Task: predict the next word that's going to come at the end of the sentence.`
 
+##### `Step 1: RNN Tensorflow model from Scratch`
+
+> <img width="500" alt="IMG" src="https://user-images.githubusercontent.com/73331241/177021781-39effac4-1ac0-4cf7-9f40-078d8e25efe0.png">
+
+##### `Step 2: Use the functions`
+
+> <img width="500" alt="IMG" src="https://user-images.githubusercontent.com/73331241/177021456-b6d8f601-e76a-49d3-b009-bbf0cde6da33.png">
+
+##### `Tensorflow application`
+
+`tf.keras.layers.SimpleRNN(run_units)`
+
+
+#### `[RNN] Sequence Model Design Criteria`
+
+----
+```diff
+ + 1. Handle `variable-length` sequences (able to short or long sentence)
+ + 2. Track `long-term` dependencies
+ + 3. Maintain information about order
+ + 4. Share parameters across the sequence to keep track of the dependency
+```
+----
+
+#### [RNN] Graph
+
+> <img width="500" alt="IMG" src="https://user-images.githubusercontent.com/73331241/177021611-fe2b9df1-8602-493d-a357-1ac0dc01e6d9.png"> <img width="500" alt="IMG" src="https://user-images.githubusercontent.com/73331241/177022257-4e7d92e8-bf49-4305-a203-ec4ea49ae305.png">
 Key: Re-use the same weight matrices at every time step
 
+#### `[RNN] Encoding Language for a Neural Network`
+
+----
+```diff
++ Key: Neural networks cannot interpret words, so they require numerical inputs
+```
+
+> <img width="500" alt="IMG" src="https://user-images.githubusercontent.com/73331241/177022135-dceaa549-5b85-4cc6-9585-e140844a4783.png">
+----
+
+#### `[RNN] Overcome Vanishing Gradient`
+
+----
+```diff
++ Key: Neural networks cannot interpret words, so they require numerical inputs
+- Be careful: Vanishing gradients problem can be more crucial in longer sentences.
+```
+----
 
 
-RNN Intutition
+#### `[Overcome Vanishing Gradient] Trick #1: Activation Functions`
 
-Task: predict the next word that's going to come at the end of the sentence.
-
-> <img width="300" alt="IMG" src="https://user-images.githubusercontent.com/73331241/177021456-b6d8f601-e76a-49d3-b009-bbf0cde6da33.png">
-
-RNN Tensorflow model from Scratch
-
-![20220703_111315](https://user-images.githubusercontent.com/73331241/177021781-39effac4-1ac0-4cf7-9f40-078d8e25efe0.png)
-
-=> tf.keras.layers.SimpleRNN(run_units) 
-
-Various RNN models
-
-![20220703_111511](https://user-images.githubusercontent.com/73331241/177021837-d9007556-a91c-4f5a-bd85-efe73fbf09a9.png)
+> <img width="500" alt="IMG" src="https://user-images.githubusercontent.com/73331241/177022443-560aa324-309a-4a20-8d2d-06f476be0615.png">
 
 
-Sequence Modeling: Design Criteria
-
-To model sequence, we need to:
- 1. Handle `variable-length` sequences (able to short or long sentence)
- 2. Track `long-term` dependencies
- 3. Maintain information about order
- 4. Share parameters across the sequence to keep track of the dependency
-
-
-Encoding Language for a Neural Network
-
-Point: Neural networks cannot interpret words, so they require numerical inputs
-
-![20220703_112934](https://user-images.githubusercontent.com/73331241/177022135-dceaa549-5b85-4cc6-9585-e140844a4783.png)
-
-
-Train RNN
-Backpropagation Through Time
-
-![20220703_113610](https://user-images.githubusercontent.com/73331241/177022257-4e7d92e8-bf49-4305-a203-ec4ea49ae305.png)
-
-
-Vanishing gradient
-> Vanishing gradients problem can be more crucial in longer sentences.
-
-How to overcome it
-
-Trick #1: Activation Functions
-
-![20220703_114431](https://user-images.githubusercontent.com/73331241/177022443-560aa324-309a-4a20-8d2d-06f476be0615.png)
-
-Trick #2: Parameter Initialization
+#### `[Overcome Vanishing Gradient] Trick #2: Parameter Initialization`
 
 > Initialize weights to identity matrix and biases to zero
 
-Trick #3: Gated Cells
+
+#### `[Overcome Vanishing Gradient] Trick #3: Gated Cells`
+
+> `Most robust solution: LSTM`
 
 
-* Most robust solution
+#### [RNN] Long Short Term Memory (LSTMs)
 
-Idea: use gates to `selectively` add or remove information within each recurrent unit with
+----
+```diff
++ Key: use gates to `selectively` add or remove information within each recurrent unit with gates (optionally let information through the cell).
 
-Gates optionally let information through the cell
+! Key conept of LSTMs 1: networks rely on a gated cell to track information throughout many time steps.
 
-![20220703_114658](https://user-images.githubusercontent.com/73331241/177022483-8e9a2638-b418-45c6-8a66-aae80403fffb.png)
+! Key conept of LSTMs 2: Use `gates` to control the `flow of information`
+!    (1) `Forget` gate gets rid of irrelevant information
+!    (2) `Store` relevant information from current input
+!    (3) Selectively `update` cell state
+!    (4) `Output` gate returns a filtered version of the cell state
 
-> Long Short Term Memory (LSTMs) networks rely on a gated cell to track information throughout many time steps.
+! Key conept of LSTMs 3: Backpropagation through time with partially `uninterrupted gradient flow`.
 
+- Limitations of RNN 1: Slow to train. (We cannot use parallelization because of sequence dependency)
 
-Long Short Term Memory (LSTMs)
+- Limitations of RNN 2: Long sequences lead to vanishing / exploding gradients
+```
 
-![20220703_114933](https://user-images.githubusercontent.com/73331241/177022534-394e18e4-6878-43fe-8bab-f5c93e020db1.png)
+> <img width="250" alt="IMG" src="https://user-images.githubusercontent.com/73331241/177022483-8e9a2638-b418-45c6-8a66-aae80403fffb.png">
 
-Key concept of LSTMs
-
-(1) Maintain a `cell state`
-
-(2) Use `gates` to control the `flow of information`
-  (i) `Forget` gate gets rid of irrelevant information
-  (ii) `Store` relevant information from current input
-  (iii) Selectively `update` cell state
-  (iv) `Output` gate returns a filtered version of the cell state
-  
-(3) Backpropagation through time with partially `uninterrupted gradient flow`.
-
-
-Limitations of Recurrent Models
-(1) Slow to train. (We cannot use parallelization because of sequence dependency)
-(2) Long sequences lead to vanishing / exploding gradients
+> <img width="500" alt="IMG" src="https://user-images.githubusercontent.com/73331241/177022534-394e18e4-6878-43fe-8bab-f5c93e020db1.png">
+----
 
 
-Trainsformer
+
+<!--
+
+Transformer
 
 > There is no concept of time step for the input. Put the sentence (e.g. The red dog) simultaneously.
 
@@ -1497,6 +1500,7 @@ Encoder Block
 
 Decoder
 
+-->
 
 <!--
 Limitations of Recurrent Models
