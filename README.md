@@ -895,7 +895,7 @@ What LN does?
 > [Property 1: `Better than Instance Normalization`]
 > > Since it has `more samples`, it can have `more stable statistics` than `Instance Norm`
 
-> [Property 2: `Better than Group Normalization`]
+> [Property 2: `Better than Layer Normalization`]
 > > Normalizing different groups of channel differently. It means `not all channels tied` as in `Layer Norm`
 
 
