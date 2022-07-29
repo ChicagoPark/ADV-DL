@@ -1458,7 +1458,6 @@ Key: Re-use the same weight matrices at every time step
 ----
 
 
-
 <!--
 
 Transformer
@@ -1529,6 +1528,52 @@ Understanding Attention with Search through YouTube Example
 Understanding Attention with Search through YouTube Example
 
 -->
+
+
+
+
+## Reinforcement Learning
+
+### `[RL] `
+
+----
+```diff
++ Key: 
+
+
+- Be careful: 
+
+! Why Reinforcement Learning has a loop?
+(1) To differentiate considering path information.
+(2) To be able to recognize long-range dependencies.
+```
+----
+
+> <img width="500" alt="IMG" src="https://user-images.githubusercontent.com/73331241/181663187-8261d646-aa18-42c3-9d30-92901c330fd2.png">
+
+
+Simple way to think: Deep Network plays video game
+
+Environment: Gives the certain state (or observation) and reward(how well agent's doing) to agent. So it tells the agent what it can see.
+
+Agent: Take the information(e.g. image) from environment and takes the action. So it tells the environment what it would like next.
+
+
+How to train agent: Environment tells agent whether they do well or not.
+
+
+Markov decision process (MDP) - Formal definition
+
+
+
+
+
+
+
+
+
+
+
 
 ----
 
